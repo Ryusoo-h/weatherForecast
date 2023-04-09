@@ -1,38 +1,63 @@
-.App {
-  text-align: center;
+
+/* 프리텐다드 */
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html, body {
+  font-family: 'Pretendard-Regular';
+  font-size: 16px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+html, body, header, section, div, p, button, ul, li {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* START 아래 컬러별 클래스이름은 TotalStatus의 gradeColorClassName과 일치함 START */
+.status-good-gradation {
+  background: linear-gradient(180deg, #5AE1FF 22.92%, #C2FFDE 100%);
+}
+.status-normal-gradation {
+  background: linear-gradient(180deg, #64D0FF 18.23%, #D3E5FF 100%);
+}
+.status-bad-gradation {
+  background: linear-gradient(180deg, #FFD15B 14.58%, #FFE1E1 100%);
+}
+.status-very-bad-gradation {
+  background: linear-gradient(180deg, #FF5F5F 16.15%, #FFD3F8 100%);
 }
 
-.App-link {
-  color: #61dafb;
+.status-good-gradation-darker {
+  background: linear-gradient(180deg, #5ED1FF 0%, #A5FAD0 100%);
+}
+.status-normal-gradation-darker {
+  background: linear-gradient(180deg, #49CBFE 18.23%, #BDE0FE 100%);
+}
+.status-bad-gradation-darker {
+  background: linear-gradient(180deg, #F9CC1F 14.58%, #FCDCCD 100%);
+}
+.status-very-bad-gradation-darker {
+  background: linear-gradient(180deg, #F93436 16.15%, #FCB4E4 100%);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.status-good {
+  background: #78F4C8;
 }
+.status-normal {
+  background: #64D0FF;
+}
+.status-bad {
+  background: #FEDA7F;
+}
+.status-very-bad {
+  background: #FF7979;
+}
+
+/* END 아래 컬러별 클래스이름은 TotalStatus의 gradeColorClassName과 일치함 END */
+
+
