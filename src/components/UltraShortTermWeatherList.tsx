@@ -88,7 +88,7 @@ const UltraShortTermWeatherList = ({ultraShortTermWeatherData}:UltraShortTermWea
                                 value = "소나기";
                                 break;
                             case "5":
-                                value = "눈";
+                                value = "빗방울";
                                 break;
                             case "6":
                                 value = "빗방울눈날림";
