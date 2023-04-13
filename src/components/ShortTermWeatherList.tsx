@@ -239,7 +239,7 @@ const ShortTermWeatherList = ({shortTermWeatherData}:ShortTermWeatherListProps) 
             {Object.keys(data).map((dateItem) => {
                 // console.log("Object.keys(data): ", Object.keys(data), "data[dateItem] :", data[dateItem]);
                 const timeItem = Object.keys(data[dateItem]).sort((a, b) => Number(a)-Number(b));
-                console.log(timeItem);
+                // console.log(timeItem);
                 return (
                     <div className="forecast-wrapper">
                         <b>{`${dateItem.slice(0,4)}년 ${dateItem.slice(4,6)}월 ${dateItem.slice(6,8)}일`}</b> 
