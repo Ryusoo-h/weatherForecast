@@ -5,6 +5,7 @@ import getAirQualityLiveInfo from './api/weatherAPI/getAirQualityLiveInfo';
 import getShortTermWeatherForecast from './api/weatherAPI/getShortTermWeatherForecast';
 import getUltraShortTermWeatherLive from './api/weatherAPI/getUltraShortTermWeatherLive';
 import './App.css';
+import CurrentWeather from './components/CurrentWeather';
 import ShortTermWeatherList from './components/ShortTermWeatherList';
 import TotalStatus from './components/TotalStatus';
 import UltraShortTermWeatherList from './components/UltraShortTermWeatherList';
@@ -137,6 +138,8 @@ function App() {
 
   return (
     <div className="App">
+      <h1 style={{textAlign: "center"}}>날씨정보</h1>
+      <CurrentWeather ultraShortTermWeatherData={ultraShortTermWeatherData} />
       <TotalStatus totalGrade={airQualityData.khaiGrade} detailGrade={detailGrade} detailGradeState={detailGradeState} dateTime={airQualityData.dataTime}/>
       <CheckDataSection>
         <div className="wrapper">

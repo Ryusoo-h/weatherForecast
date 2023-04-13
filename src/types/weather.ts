@@ -38,13 +38,20 @@ export type AirQualityData = {
     so2Flag: string | null;
 };
 
-
 export type ultraShortTermWeatherDataItem = {
     baseDate: string;
     baseTime: string;
     category: string;
     obsrValue: string;
 }
+
+export type WeatherDetailData = {
+    category: string;
+    value: string | string[]; 
+    unit: string;
+    info: string[];
+    icon: string;
+};
 
 export type ShortTermWeatherDataItem = {
     baseDate: string;
