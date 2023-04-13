@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import useGetGradeStatus from "../hooks/useGetGradeStatus";
 
-const Main = styled.main`
+const TotalStatusSection = styled.section`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -168,7 +168,7 @@ const TotalStatus = ({totalGrade, detailGrade, detailGradeState, dateTime}:Total
     },[dateTime]);
 
     return (
-        <Main className={gradeColorClassName.current[totalGrade as TotalGradeType].main}>
+        <TotalStatusSection className={gradeColorClassName.current[totalGrade as TotalGradeType].main}>
             <p className="date-and-location">
                 <span className="location">신원동</span>
                 <span className="date">{year}년 {month}월 {day}일 {hour}:{minute} 기준</span>
@@ -189,7 +189,7 @@ const TotalStatus = ({totalGrade, detailGrade, detailGradeState, dateTime}:Total
                     </ul>
                 </DetailStatusDotWrapper>
             </TotalStatusWrapper>
-        </Main>
+        </TotalStatusSection>
     );
 };
 
