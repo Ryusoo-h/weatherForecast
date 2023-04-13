@@ -32,6 +32,7 @@ export const Title = styled.h2`
 `;
 
 export const CurrentWeatherStatus = styled.div`
+    position: relative;
     width: 228px;
     height: 279px;
     padding: 16px 8px 8px;
@@ -42,14 +43,61 @@ export const CurrentWeatherStatus = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    img {
+    overflow: hidden;
+    .icon {
         width: 180px;
         height: 180px;
+        transition: all 0.25s ease-in-out;
+        &.blur {
+            filter: blur(6px);
+            opacity: 0.3;
+        }
     }
     span {
         margin-top: 18px;
         font-size: 24px;
         font-weight: bold;
+        transition: all 0.25s ease-in-out;
+        &::after {
+            opacity: 1;
+        }
+        &.blur {
+            filter: blur(6px);
+            opacity: 0.3;
+        }
+    }
+    .detail-all {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 28px 32px;
+        width: 100%;
+        height: 288px;
+        list-style: none;
+        margin: 0;
+        transition: all 0.3s ease-in-out;
+        z-index: 5;
+        &.hidden {
+            top: 100%;
+            opacity: 0;
+        }
+        li {
+            margin: 0.5em 0;
+        }
+    }
+    &:hover {
+        & .icon:not(.blur) {
+            filter: blur(3px);
+            opacity: 0.4;
+            & + span:not(.blur) {
+                filter: blur(3px);
+                opacity: 0.4;
+            }
+        }
+        .detail-all {
+            top: 0;
+            opacity: 1;
+        }
     }
 `;
 

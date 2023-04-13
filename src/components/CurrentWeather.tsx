@@ -57,6 +57,7 @@ const CurrentWeather = ({ultraShortTermWeatherData}:UltraShortTermWeatherListPro
         }
     });
 
+    const [hiddenDetailAll, setHiddenDetailAll] = useState<boolean>(true);
     useEffect(() => {
         if (ultraShortTermWeatherData.length > 0) {
             setFirstData(ultraShortTermWeatherData[0]);
@@ -290,9 +291,19 @@ const CurrentWeather = ({ultraShortTermWeatherData}:UltraShortTermWeatherListPro
                             현재 날씨 정보
                             <span><br />{`${firstData.baseDate.slice(0,4)}년 ${firstData.baseDate.slice(4,6)}월 ${firstData.baseDate.slice(6,8)}일 ${firstData.baseTime.slice(0,2)}:${firstData.baseTime.slice(2,4)}`}</span>
                         </Title>
-                        <CurrentWeatherStatus>
-                            <img className="icon" src={`${process.env.PUBLIC_URL}/image/icon-weather/weather${weatherStatus}.svg`} alt="logo" />
-                            <span>{data["강수형태"][0]}</span>
+                        <CurrentWeatherStatus onClick={() => {setHiddenDetailAll(!hiddenDetailAll); }}>
+                            <img className={`icon ${!hiddenDetailAll && 'blur'}`} src={`${process.env.PUBLIC_URL}/image/icon-weather/weather${weatherStatus}.svg`} alt="logo" />
+                            <span className={`${!hiddenDetailAll && 'blur'}`}>{data["강수형태"][0]}</span>
+                            <ul className={`detail-all ${hiddenDetailAll && 'hidden'}`} >
+                                <li>{`기온 : ${data["기온"][0]}${data["기온"][1]}`}</li>
+                                <li>{`강수형태 : ${data["강수형태"][0]}${data["강수형태"][1]}`}</li>
+                                <li>{`1시간 강수량 : ${data["1시간 강수량"][0]}${data["1시간 강수량"][1]}`}</li>
+                                <li>{`습도 : ${data["습도"][0]}${data["습도"][1]}`}</li>
+                                <li>{`풍향 : ${data["풍향"][0]}${data["풍향"][1]}`}</li>
+                                <li>{`풍속 : ${data["풍속"][0]}${data["풍속"][1]}`}</li>
+                                <li>{`동서바람성분 : ${data["동서바람성분"][0]}${data["동서바람성분"][1]}`}</li>
+                                <li>{`남북바람성분 : ${data["남북바람성분"][0]}${data["남북바람성분"][1]}`}</li>
+                            </ul>
                         </CurrentWeatherStatus>
                         <CurrentWeatherDetailList>
                             <CurrentWeatherDetail categoryName="temperature" data={weatherDetailData.temperature}/>
@@ -300,23 +311,6 @@ const CurrentWeather = ({ultraShortTermWeatherData}:UltraShortTermWeatherListPro
                             <CurrentWeatherDetail categoryName="wind" data={weatherDetailData.wind}/>
                         </CurrentWeatherDetailList>
                     </CurrentWeatherWrapper>
-
-                    {`기온 : ${data["기온"][0]}${data["기온"][1]}`}
-                    <br />
-                    {`강수형태 : ${data["강수형태"][0]}${data["강수형태"][1]}`}
-                    <br />
-                    {`1시간 강수량 : ${data["1시간 강수량"][0]}${data["1시간 강수량"][1]}`}
-                    <br />
-                    {`습도 : ${data["습도"][0]}${data["습도"][1]}`}
-                    <br />
-                    {`풍향 : ${data["풍향"][0]}${data["풍향"][1]}`}
-                    <br />
-                    {`풍속 : ${data["풍속"][0]}${data["풍속"][1]}`}
-                    <br />
-                    {`동서바람성분 : ${data["동서바람성분"][0]}${data["동서바람성분"][1]}`}
-                    <br />
-                    {`남북바람성분 : ${data["남북바람성분"][0]}${data["남북바람성분"][1]}`}
-                    <br />
                 </>
             )}
         </CurrentWeatherSection>
