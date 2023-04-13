@@ -7,7 +7,7 @@ const getAirQualityLiveInfo = async () => {
         return response.data.response.body.items[0];
     })
     .catch(e => {
-        console.log('✅getWeather API 에러 : ', e);
+        console.log('✅getAirQualityLiveInfo API 에러 : ', e);
         return [];
     })
 

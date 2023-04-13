@@ -7,7 +7,7 @@ const getUltraShortTermWeatherLive = async () => {
         return response.data.response.body.items.item;
     })
     .catch(e => {
-        console.log('✅getWeather API 에러 : ', e);
+        console.log('✅getUltraShortTermWeatherLive API 에러 : ', e);
         return [];
     })
 
