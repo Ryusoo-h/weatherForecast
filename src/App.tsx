@@ -5,7 +5,7 @@ import getAirQualityLiveInfo from './api/weatherAPI/getAirQualityLiveInfo';
 import getShortTermWeatherForecast from './api/weatherAPI/getShortTermWeatherForecast';
 import getUltraShortTermWeatherLive from './api/weatherAPI/getUltraShortTermWeatherLive';
 import './App.css';
-import ShortTermWeatherList from './components/ShortTermWeatherList copy';
+import ShortTermWeatherList from './components/ShortTermWeatherList';
 import TotalStatus from './components/TotalStatus';
 import UltraShortTermWeatherList from './components/UltraShortTermWeatherList';
 import useGetGradeStatus from './hooks/useGetGradeStatus';
