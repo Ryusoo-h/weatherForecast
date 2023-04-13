@@ -10,6 +10,7 @@
 html, body {
   font-family: 'Pretendard-Regular';
   font-size: 16px;
+  min-width: 700px;
 }
 
 html, body, header, section, div, p, button, ul, li {

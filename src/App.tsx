@@ -141,7 +141,8 @@ function App() {
       <h1 style={{textAlign: "center"}}>날씨정보</h1>
       <CurrentWeather ultraShortTermWeatherData={ultraShortTermWeatherData} />
       <TotalStatus totalGrade={airQualityData.khaiGrade} detailGrade={detailGrade} detailGradeState={detailGradeState} dateTime={airQualityData.dataTime}/>
-      <CheckDataSection>
+      
+      {/* <CheckDataSection>
         <div className="wrapper">
           <h2>실시간 대기 정보</h2>
           측정시간 : {airQualityData.dataTime} <br />
@@ -193,7 +194,7 @@ function App() {
           <h2>단기 예보</h2>
           <ShortTermWeatherList shortTermWeatherData={shortTermWeatherData} />
         </div>
-      </CheckDataSection>
+      </CheckDataSection> */}
       <Footer>
         <h1>스터디 : API연습<br />기상정보 받아오기!</h1>
         <section className='theory-memo'>
