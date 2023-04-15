@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from 'react';
+import { startTransition, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import getAirQualityLiveInfo from './api/weatherAPI/getAirQualityLiveInfo';
 import getShortTermWeatherForecast from './api/weatherAPI/getShortTermWeatherForecast';
@@ -42,6 +42,10 @@ const Footer = styled.footer`
     margin: 0 0 10px;
   }
 `;
+
+const airQualityLiveInfo = getAirQualityLiveInfo();
+const ultraShortTermWeatherLive = getUltraShortTermWeatherLive();
+const shortTermWeatherForecast = getShortTermWeatherForecast();
 
 function App() {
 
@@ -97,23 +101,19 @@ function App() {
     "coGrade": "0", // 일산화탄소 지수
   });
 
-  const getWeatherData = async() => {
-    const airQualityLiveInfo = await getAirQualityLiveInfo();
-    if (airQualityLiveInfo) {
-      setAirQualityData(airQualityLiveInfo);
-    }
-    const ultraShortTermWeatherLive = await getUltraShortTermWeatherLive();
-    if (ultraShortTermWeatherLive) {
-      setUltraShortTermWeatherData(ultraShortTermWeatherLive);
-    }
-    const shortTermWeatherForecast = await getShortTermWeatherForecast();
-    if (shortTermWeatherForecast) {
-      setShortTermWeatherData(shortTermWeatherForecast);
-    }
-  };
   useEffect(() => {
-    getWeatherData();
-  },[])
+    airQualityLiveInfo.then((response) => {
+      setAirQualityData(response);
+    });
+    ultraShortTermWeatherLive.then((response) => {
+      setUltraShortTermWeatherData(response);
+    });
+    startTransition(() => {
+      shortTermWeatherForecast.then((response) => {
+        setShortTermWeatherData(response);
+      });
+    })
+  },[]);
 
   useEffect(() => {
     const { pm25Grade1h, pm10Grade1h, o3Grade, so2Grade, no2Grade, coGrade } = airQualityData;
