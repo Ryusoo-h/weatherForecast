@@ -28,7 +28,7 @@ const CurrentWeather = ({ultraShortTermWeatherData}:UltraShortTermWeatherListPro
         "동서바람성분": ["", ""],
         "남북바람성분": ["", ""],
         "습도": ["", ""],
-        "강수형태": ["0", ""],
+        "강수형태": ["없음", ""],
         "풍향": ["", ""],
         "풍속": ["", ""]
     });
@@ -185,7 +185,7 @@ const CurrentWeather = ({ultraShortTermWeatherData}:UltraShortTermWeatherListPro
     
     useEffect(() => {
         const changeDayOrNightIcon = (hour:number) => {
-                // TODO : 시간에 따라 밤낮 아이콘으로 바꿈
+                // 시간에 따라 밤낮 아이콘으로 바꿈
                 const time = hour;
                 if (time >= 18 || time < 6) {
                     switch (weatherStatus) { 
@@ -275,21 +275,21 @@ const CurrentWeather = ({ultraShortTermWeatherData}:UltraShortTermWeatherListPro
 
     return(
         <CurrentWeatherSection>
-            {ultraShortTermWeatherData.length === 0 ?  (
-                <>
-                    <CurrentWeatherWrapper>
-                        <Title>
-                            <h2>현재 날씨 정보</h2>
-                        </Title>
-                        <div>날씨정보를 가져올 수 없습니다😥</div>
-                    </CurrentWeatherWrapper>
-                </>
-            ) : (
                 <>
                     <CurrentWeatherWrapper>
                         <Title>
                             현재 날씨 정보
-                            <span><br />{`${firstData.baseDate.slice(0,4)}년 ${firstData.baseDate.slice(4,6)}월 ${firstData.baseDate.slice(6,8)}일 ${firstData.baseTime.slice(0,2)}:${firstData.baseTime.slice(2,4)}`}</span>
+                            {ultraShortTermWeatherData.length === 0 ? (
+                                <>
+                                    <br />
+                                    <span className="alert">날씨정보를 가져올 수 없습니다😥</span>
+                                </>
+                            ):(
+                                <>
+                                    <br />
+                                    <span>{`${firstData.baseDate.slice(0,4)}년 ${firstData.baseDate.slice(4,6)}월 ${firstData.baseDate.slice(6,8)}일 ${firstData.baseTime.slice(0,2)}:${firstData.baseTime.slice(2,4)}`}</span>
+                                </>
+                            )}
                         </Title>
                         <CurrentWeatherStatus onClick={() => {setHiddenDetailAll(!hiddenDetailAll); }}>
                             <img className={`icon ${!hiddenDetailAll && 'blur'}`} src={`${process.env.PUBLIC_URL}/image/icon-weather/weather${weatherStatus}.svg`} alt="logo" />
@@ -312,7 +312,6 @@ const CurrentWeather = ({ultraShortTermWeatherData}:UltraShortTermWeatherListPro
                         </CurrentWeatherDetailList>
                     </CurrentWeatherWrapper>
                 </>
-            )}
         </CurrentWeatherSection>
     );
 };

@@ -25,15 +25,27 @@ export const Title = styled.h2`
     font-size: 28px;
     line-height: 0.9em;
     grid-area: 1/2/2/3;
+    position: relative;
     span {
         font-size: 16px;
         font-weight: normal;
+    }
+    .alert {
+        display: inline-block;
+        background-color: rgba(255,255,255,0.8);
+        color: #EA4B4B;
+        text-shadow: none;
+        margin-top: 16px;
+        padding: 2px 16px;
+        border-radius: 20px;
+        font-size: 14px;
+        line-height: 20px;
     }
 `;
 
 export const CurrentWeatherStatus = styled.div`
     position: relative;
-    width: 228px;
+    width: 196px;
     height: 279px;
     padding: 16px 8px 8px;
     grid-area: 1/1/2/2;
@@ -70,7 +82,7 @@ export const CurrentWeatherStatus = styled.div`
         position: absolute;
         top: 0;
         left: 0;
-        padding: 28px 32px;
+        padding: 28px 0px 28px 18px;
         width: 100%;
         height: 288px;
         list-style: none;
