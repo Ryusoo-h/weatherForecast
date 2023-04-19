@@ -7,10 +7,10 @@ import getUltraShortTermWeatherLive from './api/weatherAPI/getUltraShortTermWeat
 import './App.css';
 import CurrentWeather from './components/CurrentWeather';
 import ShortTermWeatherList from './components/ShortTermWeatherList';
-import TotalStatus from './components/TotalStatus';
 import UltraShortTermWeatherList from './components/UltraShortTermWeatherList';
 import useGetGradeStatus from './hooks/useGetGradeStatus';
 import { AirQualityData, ShortTermWeatherDataItem, ultraShortTermWeatherDataItem } from './types/weather';
+import AirQualityStatus from './components/AirQualityStatus';
 
 const CheckDataSection = styled.section`
   margin: 0 auto;
@@ -72,7 +72,7 @@ function App() {
   const [shortTermWeatherData, setShortTermWeatherData] = useState<ShortTermWeatherDataItem[]>([]);
 
 
-  const [detailGrade, setDetailGrade] = useState({
+  const [airDetailGrade, setAirDetailGrade] = useState({
     "pm25Grade1h": "0", // 미세먼지(PM2.5) 1시간 등급
     "pm10Grade1h": "0", // 미세먼지(PM10) 1시간 등급
     "o3Grade": "0", // 오존 지수
@@ -83,7 +83,9 @@ function App() {
 
   useEffect(() => {
     airQualityLiveInfo.then((response) => {
-      setAirQualityData(response);
+      if (!Array.isArray(response)) {
+        setAirQualityData(response);
+      }
     });
     ultraShortTermWeatherLive.then((response) => {
       setUltraShortTermWeatherData(response);
@@ -97,7 +99,7 @@ function App() {
 
   useEffect(() => {
     const { pm25Grade1h, pm10Grade1h, o3Grade, so2Grade, no2Grade, coGrade } = airQualityData;
-    setDetailGrade({ 
+    setAirDetailGrade({ 
       pm25Grade1h: pm25Grade1h || "0",
       pm10Grade1h: pm10Grade1h || "0",
       o3Grade: o3Grade || "0",
@@ -108,19 +110,19 @@ function App() {
   },[airQualityData])
 
   const detailGradeState = useGetGradeStatus([
-    detailGrade.pm25Grade1h,
-    detailGrade.pm10Grade1h,
-    detailGrade.o3Grade,
-    detailGrade.so2Grade,
-    detailGrade.no2Grade,
-    detailGrade.coGrade
+    airDetailGrade.pm25Grade1h,
+    airDetailGrade.pm10Grade1h,
+    airDetailGrade.o3Grade,
+    airDetailGrade.so2Grade,
+    airDetailGrade.no2Grade,
+    airDetailGrade.coGrade
   ]);
 
   return (
     <div className="App">
       <h1 style={{textAlign: "center"}}>날씨정보</h1>
       <CurrentWeather ultraShortTermWeatherData={ultraShortTermWeatherData} />
-      <TotalStatus totalGrade={airQualityData.khaiGrade} detailGrade={detailGrade} detailGradeState={detailGradeState} dateTime={airQualityData.dataTime}/>
+      <AirQualityStatus lotate={airQualityData.stationName} totalGrade={airQualityData.khaiGrade} detailGrade={airDetailGrade} detailGradeState={detailGradeState} dateTime={airQualityData.dataTime}/>
       
       {/* <CheckDataSection>
         <div className="wrapper">

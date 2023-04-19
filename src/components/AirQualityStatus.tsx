@@ -105,6 +105,7 @@ const DetailStatusDotWrapper = styled.section`
 type TotalGradeType = "1" | "2" | "3" | "4" | "0";
 type detailGradeType = "1" | "2" | "3" | "4" | "0";
 type TotalStatusProps = {
+    lotate: string;
     totalGrade: string;
     detailGrade: {
         "pm25Grade1h": string; // 미세먼지(PM2.5) 1시간 등급
@@ -118,7 +119,7 @@ type TotalStatusProps = {
     dateTime: string;
 }
 
-const TotalStatus = ({totalGrade, detailGrade, detailGradeState, dateTime}:TotalStatusProps) => {
+const AirQualityStatus = ({lotate, totalGrade, detailGrade, detailGradeState, dateTime}:TotalStatusProps) => {
     const gradeColorClassName = useRef({
         "1" : { // 좋음
             main: "status-good-gradation",
@@ -129,25 +130,21 @@ const TotalStatus = ({totalGrade, detailGrade, detailGradeState, dateTime}:Total
             main: "status-normal-gradation",
             totalStatus: "status-normal-gradation-darker",
             detailStatus: "status-normal",
-
         },
         "3" : { // 나쁨
             main: "status-bad-gradation",
             totalStatus: "status-bad-gradation-darker",
             detailStatus: "status-bad",
-
         },
         "4" : { // 매우 나쁨
             main: "status-very-bad-gradation",
             totalStatus: "status-very-bad-gradation-darker",
             detailStatus: "status-very-bad",
-
         },
         "0" : { // 값이 없을때 : 보통
             main: "status-normal-gradation",
             totalStatus: "status-normal-gradation-darker",
             detailStatus: "status-normal",
-
         }
     });
     
@@ -159,9 +156,9 @@ const TotalStatus = ({totalGrade, detailGrade, detailGradeState, dateTime}:Total
         hour: "hh", 
         minute: "mm",
     });
-
     useEffect(() => {
-        const [datePart, timePart] = dateTime.split(" ");
+        const dateTimeData = dateTime ? dateTime : "0000-00-00 00:00";
+        const [datePart, timePart] = dateTimeData.split(" ");
         const [year, month, day] = datePart.split("-");
         const [hour, minute] = timePart.split(":");
         setNewDateTime({year, month, day, hour, minute});
@@ -170,7 +167,7 @@ const TotalStatus = ({totalGrade, detailGrade, detailGradeState, dateTime}:Total
     return (
         <TotalStatusSection className={gradeColorClassName.current[totalGrade as TotalGradeType].main}>
             <p className="date-and-location">
-                <span className="location">신원동</span>
+                <span className="location">{lotate ? lotate : "측정소 정보 없음"}</span>
                 <span className="date">{year}년 {month}월 {day}일 {hour}:{minute} 기준</span>
             </p>
             <TotalStatusWrapper className={gradeColorClassName.current[totalGrade as TotalGradeType].totalStatus}>
@@ -193,4 +190,4 @@ const TotalStatus = ({totalGrade, detailGrade, detailGradeState, dateTime}:Total
     );
 };
 
-export default TotalStatus;
+export default AirQualityStatus;
