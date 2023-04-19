@@ -23,26 +23,6 @@ const CheckDataSection = styled.section`
   }
 `;
 
-const Footer = styled.footer`
-  text-align: left;
-  background-color: #f8f8f8;
-  padding: 20px 0;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  h1 {
-    color: #5f63ff;
-  }
-  ul {
-    text-align: left;
-    margin: 20px 0;
-  }
-  ul ul {
-    margin: 0 0 10px;
-  }
-`;
-
 const airQualityLiveInfo = getAirQualityLiveInfo();
 const ultraShortTermWeatherLive = getUltraShortTermWeatherLive();
 const shortTermWeatherForecast = getShortTermWeatherForecast();
@@ -195,47 +175,6 @@ function App() {
           <ShortTermWeatherList shortTermWeatherData={shortTermWeatherData} />
         </div>
       </CheckDataSection> */}
-      <Footer>
-        <h1>스터디 : API연습<br />기상정보 받아오기!</h1>
-        <section className='theory-memo'>
-          <h2>개념채우기</h2>
-          <ul>
-            <li><b>SOP</b>
-              <ul>
-                <li>Same-origin policy, 동일 출처 정책</li>
-              </ul>
-            </li>
-            <li><b>CORS</b>
-              <ul>
-                <li>Cross-Origin Resource Sharing, 교차 출처 리소스 공유</li>
-                <li>서버와 클라이언트가 서로 설정이되어있어야함!</li>
-                <li>하지만 서버-서버 간에는 CORS가 딱히 없다! .'. 프록시 서버를..!</li>
-                <li>.'. 서버를 만들어서 공공 API로 요청을 보내고 받아서 → 클라이언트로 보내줌</li>
-                <li>공공 API는 서버끼리 되도록 열어두는 경우가 많다..</li>
-              </ul>
-            </li>
-            <li><b>프록시 서버</b>
-              <ul>
-                <li>종류1(온전한 프록시 서버): 요청하고 요청한것을 가공없이 그대로 준다</li>
-                <li>종류2 : 요청한것을 가공하여 주는 것 (엄격한 기준에 의하면 이 경우 프록시 서버가 아니라고 할 수도 있다)</li>
-              </ul>
-            </li>
-            <li>참고
-              <ul>
-                <li><a href="https://velog.io/@jesop/SOP%EC%99%80-CORS" target="_blink">SOP와 CORS</a></li>
-              </ul>
-            </li>
-          </ul>
-        </section>
-        <section className='reference-memo'>
-          <h2>자료 참고</h2>
-          <ul>
-            <li><a href="https://www.data.go.kr/data/15084084/openapi.do" target="_blink">오픈API 상세 : 기상청_단기예보 ((구)_동네예보) 조회서비스</a></li>
-            <li><a href="https://www.data.go.kr/data/15059468/openapi.do" target="_blink">오픈API 상세 : 기상청_중기예보 조회서비스</a></li>
-            <li><a href="https://cleanair.seoul.go.kr/information/info11#emergency-response" target="_blink">대기환경정보 참고</a></li>
-          </ul>
-        </section>
-      </Footer>
     </div>
   );
 };

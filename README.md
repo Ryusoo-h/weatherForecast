@@ -1,46 +1,26 @@
-# Getting Started with Create React App
+# 스터디
+## API연습 : 기상정보 받아오기
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+참고 자료
 
-## Available Scripts
+[오픈API 상세 : 기상청_단기예보 ((구)_동네예보) 조회서비스](https://www.data.go.kr/data/15084084/openapi.do)
 
-In the project directory, you can run:
+[오픈API 상세 : 기상청_중기예보 조회서비스](https://www.data.go.kr/data/15059468/openapi.do)
 
-### `yarn start`
+[대기환경정보 참고](https://cleanair.seoul.go.kr/information/info11#emergency-response)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+---
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 개념
+- SOP
+    - Same-origin policy, 동일 출처 정책
+- CORS
+    - Cross-Origin Resource Sharing, 교차 출처 리소스 공유
+    - 하지만 서버-서버 간에는 CORS가 없다!
+    - 공공 API는 서버끼리 되도록 열어두는 경우가 많다..
+    - .'. 프록시 서버를 만들어서 공공 API로 요청을 보내고 받아서 → 클라이언트로 보내줌
+- 프록시 서버
+    - 종류1(온전한 프록시 서버): 요청하고 요청한것을 가공없이 그대로 준다
+    - 종류2 : 요청한것을 가공하여 주는 것 (엄격한 기준에 의하면 이 경우 프록시 서버가 아니라고 할 수도 있다)
 
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+참고 : [SOP와 CORS](https://velog.io/@jesop/SOP%EC%99%80-CORS)
