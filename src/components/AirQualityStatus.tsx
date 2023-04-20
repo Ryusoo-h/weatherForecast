@@ -65,12 +65,12 @@ const AirQualityStatus = ({lotate, totalGrade, detailGrade, detailGradeState, da
     },[dateTime]);
 
     return (
-        <TotalStatusSection className={gradeColorClassName.current[totalGrade as TotalGradeType].main}>
+        <TotalStatusSection className={gradeColorClassName.current[totalGrade as TotalGradeType || 0].main}>
             <p className="date-and-location">
                 <span className="location">{lotate ? lotate : "측정소 정보 없음"}</span>
                 <span className="date">{year}년 {month}월 {day}일 {hour}:{minute} 기준</span>
             </p>
-            <TotalStatusWrapper className={gradeColorClassName.current[totalGrade as TotalGradeType].totalStatus}>
+            <TotalStatusWrapper className={gradeColorClassName.current[totalGrade as TotalGradeType || 0].totalStatus}>
                 <p className="status">
                     <span className="status-title">통합대기환경수치</span>
                     <span className="status-grade">{totalGradeStatus}</span>

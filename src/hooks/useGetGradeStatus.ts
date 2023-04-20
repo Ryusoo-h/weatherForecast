@@ -24,6 +24,7 @@ const useGetGradeStatus = (grades:string[]):string[] => {
                         setGradeStatus((prevGradeStatus) => [...prevGradeStatus, "매우나쁨"]);
                         break;
                     default:
+                        setGradeStatus((prevGradeStatus) => [...prevGradeStatus, "정보없음"]);
                         console.log("✅잘못된 등급 값입니다");
                 }
             });
