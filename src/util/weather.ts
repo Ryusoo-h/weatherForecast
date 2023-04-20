@@ -31,7 +31,7 @@ export const temperatureStatus = new Map<string, string>([
     ["19.9", "얇은 니트/가디건/2"],
     ["99", "얇은 옷/반팔, 반바지/1"]
 ]);
-export const temperatureValue = [4.9, 12.9, 19.9, 99];
+export const temperatureValue = [4.9, 11.9, 19.9, 99];
 
 // 습도 상태
 // 사용중인 컴포넌트 : CurrentWeather
