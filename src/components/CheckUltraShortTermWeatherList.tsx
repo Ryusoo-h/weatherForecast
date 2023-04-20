@@ -7,7 +7,7 @@ type UltraShortTermWeatherListProps = {
 
 type Category = { [key: string]: [string, string]; };
 
-const UltraShortTermWeatherList = ({ultraShortTermWeatherData}:UltraShortTermWeatherListProps) => {
+const CheckUltraShortTermWeatherList = ({ultraShortTermWeatherData}:UltraShortTermWeatherListProps) => {
     const [firstData, setFirstData] = useState<ultraShortTermWeatherDataItem>({
         baseDate: "",
         baseTime: "",
@@ -136,4 +136,4 @@ const UltraShortTermWeatherList = ({ultraShortTermWeatherData}:UltraShortTermWea
     );
 };
 
-export default UltraShortTermWeatherList;
+export default CheckUltraShortTermWeatherList;

@@ -6,11 +6,12 @@ import getShortTermWeatherForecast from './api/weatherAPI/getShortTermWeatherFor
 import getUltraShortTermWeatherLive from './api/weatherAPI/getUltraShortTermWeatherLive';
 import './App.css';
 import CurrentWeather from './components/CurrentWeather';
-import ShortTermWeatherList from './components/ShortTermWeatherList';
-import UltraShortTermWeatherList from './components/UltraShortTermWeatherList';
+import CheckShortTermWeatherList from './components/ShortTermWeatherList';
+import CheckUltraShortTermWeatherList from './components/CheckUltraShortTermWeatherList';
 import useGetGradeStatus from './hooks/useGetGradeStatus';
 import { AirQualityData, ShortTermWeatherDataItem, ultraShortTermWeatherDataItem } from './types/weather';
 import AirQualityStatus from './components/AirQualityStatus';
+import ShortTermWeatherList from './components/ShortTermWeatherList';
 
 const CheckDataSection = styled.section`
   margin: 0 auto;
@@ -122,8 +123,8 @@ function App() {
     <div className="App">
       <h1 style={{textAlign: "center"}}>날씨정보</h1>
       <CurrentWeather ultraShortTermWeatherData={ultraShortTermWeatherData} />
+      <ShortTermWeatherList shortTermWeatherData={shortTermWeatherData} />
       <AirQualityStatus lotate={airQualityData.stationName} totalGrade={airQualityData.khaiGrade} detailGrade={airDetailGrade} detailGradeState={detailGradeState} dateTime={airQualityData.dataTime}/>
-      
       {/* <CheckDataSection>
         <div className="wrapper">
           <h2>실시간 대기 정보</h2>
@@ -170,11 +171,11 @@ function App() {
         </div>
         <div className="wrapper">
           <h2>현재 날씨 정보</h2>
-          <UltraShortTermWeatherList ultraShortTermWeatherData={ultraShortTermWeatherData} />
+          <CheckUltraShortTermWeatherList ultraShortTermWeatherData={ultraShortTermWeatherData} />
         </div>
         <div className="wrapper">
           <h2>단기 예보</h2>
-          <ShortTermWeatherList shortTermWeatherData={shortTermWeatherData} />
+          <CheckShortTermWeatherList shortTermWeatherData={shortTermWeatherData} />
         </div>
       </CheckDataSection> */}
     </div>

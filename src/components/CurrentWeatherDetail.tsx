@@ -7,17 +7,20 @@ type CurrentWeatherDetailType = {
 }
 
 const CurrentWeatherDetail = ({categoryName, data}:CurrentWeatherDetailType) => {
-
+    const {category, value, info, unit, icon} = data;
     return (
         <WeatherDetail key={categoryName}>
-            <span className="category">{data.category}</span>
+            <span className="category">{category}</span>
             <ul>
                 <li key={categoryName + "-icon-and-value"} className={`icon-and-value ${categoryName}`}>
-                    <img className="icon" style={{transform: `rotate(${Array.isArray(data.value) ? data.value[0] : 0}deg)`}} src={`${process.env.PUBLIC_URL}/image/icon-weather_detail/${categoryName}${data.icon}.svg`} alt="logo" />
-                    <span className="value">{Array.isArray(data.value) ? data.value[0] : data.value}{data.unit}</span>
+                    <img className="icon" 
+                        style={{transform: `rotate(${Array.isArray(value) ? value[0] : 0}deg)`}} 
+                        src={`${process.env.PUBLIC_URL}/image/icon-weather_detail/${categoryName}${icon}.svg`} alt="logo" 
+                    />
+                    <span className="value">{Array.isArray(value) ? value[0] : value}{unit}</span>
                 </li>
-                <li key={data.category + "-info"} className={`info ${categoryName}`}>
-                    {data.info.map((item, index) => (<span key={categoryName + index}>{item}</span>))}
+                <li key={category + "-info"} className={`info ${categoryName}`}>
+                    {info.map((item, index) => (<span key={categoryName + index}>{item}</span>))}
                 </li>
             </ul>
         </WeatherDetail>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { ultraShortTermWeatherDataItem, WeatherDetailData } from "../types/weather";
+import { ultraShortTermWeatherDataItem } from "../types/weather";
+import { changeDayOrNightIcon, humidityStatus, humidityValue, printCategoryStatusByValue, ptyStatus, ptyValue, temperatureStatus, temperatureValue, wsdStatus, wsdValue } from "../util/weather";
 import { CurrentWeatherSection, CurrentWeatherWrapper, Title, CurrentWeatherDetailList, CurrentWeatherStatus } from "./CurrentWeather.style";
 import CurrentWeatherDetail from "./CurrentWeatherDetail";
 
@@ -8,9 +9,27 @@ type UltraShortTermWeatherListProps = {
 }
 
 type WeatherDetailDataList = {
-    temperature: WeatherDetailData;
-    humidity: WeatherDetailData;
-    wind: WeatherDetailData;
+    temperature: {
+        category: string;
+    value: string; 
+    unit: string;
+    info: string[];
+        icon: string,
+    },
+    humidity: {
+        category: string;
+        value: string; 
+        unit: string;
+        info: string[];
+        icon: string,
+    },
+    wind: {
+        category: string;
+        value: string | string[]; 
+        unit: string;
+        info: string[];
+        icon: string,
+    }
 }
 
 type Category = { [CategoryName: string]: [string, string]; };
@@ -23,15 +42,16 @@ const CurrentWeather = ({ultraShortTermWeatherData}:UltraShortTermWeatherListPro
         obsrValue: ""
     });
     const [data, setData] = useState<Category>({
-        "기온": ["", ""],
-        "1시간 강수량": ["", ""],
-        "동서바람성분": ["", ""],
-        "남북바람성분": ["", ""],
-        "습도": ["", ""],
-        "강수형태": ["없음", ""],
-        "풍향": ["", ""],
-        "풍속": ["", ""]
+        T1H: ["", ""], // T1H : 기온
+        RN1: ["", ""], // RN1 : 1시간 강수량
+        UUU: ["", ""], // UUU : 동서바람성분
+        VVV: ["", ""], // VVV : 남북바람성분
+        REH: ["", ""], // REH : 습도
+        PTY: ["없음", ""], // PTY : 강수형태
+        VEC: ["", ""], // VEC : 풍향
+        WSD: ["", ""] // WSD : 풍속
     });
+
     const [weatherStatus, setWeatherStatus] = useState<string>("1");
     const [weatherDetailData, setWeatherDetailData] = useState<WeatherDetailDataList>({
         temperature: {
@@ -60,217 +80,90 @@ const CurrentWeather = ({ultraShortTermWeatherData}:UltraShortTermWeatherListPro
     const [hiddenDetailAll, setHiddenDetailAll] = useState<boolean>(true);
     useEffect(() => {
         if (ultraShortTermWeatherData.length > 0) {
+            // 받아온 데이터(ultraShortTermWeatherData)를 data와 weatherDetailData에 update함
             setFirstData(ultraShortTermWeatherData[0]);
             const getNewData = (ultraShortTermWeatherData:ultraShortTermWeatherDataItem[]) => {
-                const newDataArray = ultraShortTermWeatherData.flatMap((item:ultraShortTermWeatherDataItem) => {
-                    let categoryName = "";
+                let newDataObj:{[category:string]: [value:string, unit:string]} = {};
+                ultraShortTermWeatherData.forEach((item:ultraShortTermWeatherDataItem) => {
                     let value = item.obsrValue;
-                    let unit = "";
-                    switch (item.category) {
-                        case "T1H":
-                            categoryName = "기온";
-                            unit = "℃";
-                            break;
-                        case "RN1":
-                            categoryName = "1시간 강수량";
-                            unit = "mm";
-                            break;
-                        case "UUU":
-                            categoryName = "동서바람성분";
-                            unit = "m/s";
-                            break;
-                        case "VVV":
-                            categoryName = "남북바람성분";
-                            unit = "m/s";
-                            break;
-                        case "REH":
-                            categoryName = "습도";
-                            unit = "%";
-                            break;
-                        case "PTY":
-                            categoryName = "강수형태";
-                            unit = "";
-                            break;
-                        case "VEC":
-                            categoryName = "풍향";
-                            unit = "deg";
-                            break;
-                        case "WSD":
-                            categoryName = "풍속";
-                            unit = "m/s";
-                            break;
-                        default:
-                            categoryName = "";
-                            unit = "";
-                            console.log("✅잘못된 값입니다");
+                    
+                    const categoryUnit = new Map([  ['T1H', '℃'],
+                        ['RN1', 'mm'],
+                        ['UUU', 'm/s'],
+                        ['VVV', 'm/s'],
+                        ['REH', '%'],
+                        ['PTY', ''],
+                        ['VEC', 'deg'],
+                        ['WSD', 'm/s']
+                    ]);
+                    const unit = categoryUnit.get(item.category) || '';
+
+                    if (item.category === "PTY") { // 강수 상태
+                        const newValue = printCategoryStatusByValue(item.obsrValue, ptyValue, ptyStatus, false).split(',');
+                        value = newValue[0] === "없음" ? "맑음" : newValue[0];
+                        setWeatherStatus(newValue[1]);
                     }
-                    if (item.category === "PTY") {
-                        switch (item.obsrValue) {
-                            case "0":
-                                value = "맑음";
-                                setWeatherStatus("1");
-                                break;
-                            case "1":
-                                value = "비";
-                                setWeatherStatus("7");
-                                break;
-                            case "2":
-                                value = "비/눈";
-                                setWeatherStatus("8");
-                                break;
-                            case "3":
-                                value = "눈";
-                                setWeatherStatus("9");
-                                break;
-                            case "4":
-                                value = "소나기";
-                                setWeatherStatus("11");
-                                break;
-                            case "5":
-                                value = "빗방울";
-                                setWeatherStatus("13");
-                                break;
-                            case "6":
-                                value = "빗방울눈날림";
-                                setWeatherStatus("15");
-                                break;
-                            case "7":
-                                value = "눈날림";
-                                setWeatherStatus("17");
-                                break;
-                            default:
-                                value = "";
-                                console.log("✅잘못된 값입니다");
-                        };
-                    }
-                    return [categoryName, value, unit]
+                    newDataObj[item.category] = [value, unit];
                 });
-                let newData:Category = {};
-                for (let i = 0; i < newDataArray.length; i += 3) {
-                    newData[newDataArray[i]] = [newDataArray[i+1], newDataArray[i+2]];
-                };
-                return newData;
+                // console.log(newDataObj);
+                return newDataObj;
             };
             const newData = getNewData(ultraShortTermWeatherData);
             setData(newData);
             setWeatherDetailData({
                 temperature: {
                     category: "온도",
-                    value: newData["기온"][0],
-                    unit: newData["기온"][1],
+                    value: newData.T1H[0],
+                    unit: newData.T1H[1],
                     info: [],
                     icon: "1",
                 },
                 humidity: {
                     category: "습도",
-                    value: newData["습도"][0],
-                    unit: newData["습도"][1],
+                    value: newData.REH[0],
+                    unit: newData.REH[1],
                     info: [],
                     icon: "1",
                 },
                 wind: {
                     category: "바람",
-                    value: [newData["풍속"][0], newData["풍향"][0]],
-                    unit: newData["풍속"][1],
+                    value: [newData.WSD[0], newData.VEC[0]],
+                    unit: newData.WSD[1],
                     info: [],
                     icon: "",
                 }
             });
-            if (newData["강수형태"][1] === "맑음") {
-                // TODO : 3일 단기예보 들고오면 하늘 상태에 따라 바꾸자!(맑음/구름많음/흐림)
-                // setWeatherStatus("1");
-            }
         };
     },[ultraShortTermWeatherData]);
     
     useEffect(() => {
-        const changeDayOrNightIcon = (hour:number) => {
-                // 시간에 따라 밤낮 아이콘으로 바꿈
-                const time = hour;
-                if (time >= 18 || time < 6) {
-                    switch (weatherStatus) { 
-                        case "1":
-                        case "3":
-                        case "11":
-                        case "13":
-                        case "15":
-                        case "17":
-                        // 밤낮 아이콘이 따로있는것중 밤 아이콘을 표시할 경우
-                        setWeatherStatus(String(Number(weatherStatus) + 1));
-                        break;
-                    default:
-                        break;
-                    }
-                }
-        };
         if (ultraShortTermWeatherData.length > 0) {
-            changeDayOrNightIcon(Number(ultraShortTermWeatherData[0].baseDate.slice(0,2)));
-        
+            // 낮과 밤 시간에 따라 아이콘을 Update함
+            changeDayOrNightIcon(Number(ultraShortTermWeatherData[0].baseTime.slice(0,2)), weatherStatus, setWeatherStatus);
         }
     }, [ultraShortTermWeatherData, weatherStatus]);
 
     useEffect(() => {
         if (ultraShortTermWeatherData.length > 0) {
+            // 온도, 습도, 바람 값에 따라 상태와 아이콘이미지 num를 바꿔서 weatherDetailData에 Update함
             const newWeatherDetail = weatherDetailData;
 
-            const temperature = Number(weatherDetailData.temperature.value);
-            const humidity = Number(weatherDetailData.humidity.value);
-            const wind = Number(weatherDetailData.wind.value[0]);
+            const temperature = weatherDetailData.temperature.value;
+            const humidity = weatherDetailData.humidity.value;
+            const wind = weatherDetailData.wind.value[0];
 
-            if (temperature < 5) {
-                newWeatherDetail.temperature.info = ["패딩, 내복", "목도리"];
-                newWeatherDetail.temperature.icon = "1";
-            } else if (temperature < 12) {
-                newWeatherDetail.temperature.info = ["코트, 기모", "여러겹"];
-                newWeatherDetail.temperature.icon = "2";
-            } else if (temperature < 20) {
-                newWeatherDetail.temperature.info = ["얇은 니트", "가디건"];
-                newWeatherDetail.temperature.icon = "3";
-            } else if (temperature >= 20) {
-                newWeatherDetail.temperature.info = ["얇은 옷", "반팔, 반바지"];
-                newWeatherDetail.temperature.icon = "4";
-            } else {
-                newWeatherDetail.temperature.info = [""];
-                newWeatherDetail.temperature.icon = "1";
-            };
+            const [newTemperatureInfo1, newTemperatureInfo2, newTemperatureIcon] = printCategoryStatusByValue(temperature, temperatureValue, temperatureStatus, false).split('/');
+            newWeatherDetail.temperature.info = [newTemperatureInfo1, newTemperatureInfo2];
+            newWeatherDetail.temperature.icon = newTemperatureIcon;
 
-            if (humidity < 30) {
-                newWeatherDetail.humidity.info = ["건조함"];
-                newWeatherDetail.humidity.icon = "1";
-            } else if (humidity < 40) {
-                newWeatherDetail.humidity.info = ["보통"];
-                newWeatherDetail.humidity.icon = "2";
-            } else if (humidity < 60) {
-                newWeatherDetail.humidity.info = ["쾌적함"];
-                newWeatherDetail.humidity.icon = "3";
-            } else if (humidity < 70) {
-                newWeatherDetail.humidity.info = ["보통"];
-                newWeatherDetail.humidity.icon = "4";
-            } else if (humidity >= 70) {
-                newWeatherDetail.humidity.info = ["습함"];
-                newWeatherDetail.humidity.icon = "5";
-            } else if (humidity >= 100) {
-                newWeatherDetail.humidity.info = ["습함"];
-                newWeatherDetail.humidity.icon = "6"; 
-            } else {
-                newWeatherDetail.humidity.info = [""];
-                newWeatherDetail.humidity.icon = "6";
-            };
+            const [newHumidityInfo, newHumidityIcon] = printCategoryStatusByValue(humidity, humidityValue, humidityStatus, false).split(',');
+            newWeatherDetail.humidity.info = [newHumidityInfo];
+            newWeatherDetail.humidity.icon = newHumidityIcon;
 
-            if (wind < 4) {
-                newWeatherDetail.wind.info = ["약함"];
-            } else if (wind < 9) {
-                newWeatherDetail.wind.info = ["약간 강함"];
-            } else if (wind < 14) {
-                newWeatherDetail.wind.info = ["강함"];
-            } else if (wind >= 14) {
-                newWeatherDetail.wind.info = ["매우 강함"];
-            } else {
-                newWeatherDetail.wind.info = [""];
-            };
+            newWeatherDetail.wind.info = [printCategoryStatusByValue(wind, wsdValue, wsdStatus, false)];
+
             setWeatherDetailData(newWeatherDetail);
         }
-
     }, [weatherDetailData]);
 
     return(
@@ -287,22 +180,22 @@ const CurrentWeather = ({ultraShortTermWeatherData}:UltraShortTermWeatherListPro
                             ):(
                                 <>
                                     <br />
-                                    <span>{`${firstData.baseDate.slice(0,4)}년 ${firstData.baseDate.slice(4,6)}월 ${firstData.baseDate.slice(6,8)}일 ${firstData.baseTime.slice(0,2)}:${firstData.baseTime.slice(2,4)}`}</span>
+                                    <span>{`${firstData.baseDate.slice(0,4)}년 ${firstData.baseDate.slice(4,6)}월 ${firstData.baseDate.slice(6,8)}일 ${firstData.baseTime.slice(0,2)}:${firstData.baseTime.slice(2,4)}`} 발표</span>
                                 </>
                             )}
                         </Title>
                         <CurrentWeatherStatus onClick={() => {setHiddenDetailAll(!hiddenDetailAll); }}>
                             <img className={`icon ${!hiddenDetailAll && 'blur'}`} src={`${process.env.PUBLIC_URL}/image/icon-weather/weather${weatherStatus}.svg`} alt="logo" />
-                            <span className={`${!hiddenDetailAll && 'blur'}`}>{data["강수형태"][0]}</span>
+                            <span className={`${!hiddenDetailAll && 'blur'}`}>{data.PTY[0]}</span>
                             <ul className={`detail-all ${hiddenDetailAll && 'hidden'}`} >
-                                <li>{`기온 : ${data["기온"][0]}${data["기온"][1]}`}</li>
-                                <li>{`강수형태 : ${data["강수형태"][0]}${data["강수형태"][1]}`}</li>
-                                <li>{`1시간 강수량 : ${data["1시간 강수량"][0]}${data["1시간 강수량"][1]}`}</li>
-                                <li>{`습도 : ${data["습도"][0]}${data["습도"][1]}`}</li>
-                                <li>{`풍향 : ${data["풍향"][0]}${data["풍향"][1]}`}</li>
-                                <li>{`풍속 : ${data["풍속"][0]}${data["풍속"][1]}`}</li>
-                                <li>{`동서바람성분 : ${data["동서바람성분"][0]}${data["동서바람성분"][1]}`}</li>
-                                <li>{`남북바람성분 : ${data["남북바람성분"][0]}${data["남북바람성분"][1]}`}</li>
+                                <li>{`기온 : ${data.T1H[0]}${data.T1H[1]}`}</li>
+                                <li>{`강수형태 : ${data.PTY[0]}${data.PTY[1]}`}</li>
+                                <li>{`1시간 강수량 : ${data.RN1[0]}${data.RN1[1]}`}</li>
+                                <li>{`습도 : ${data.REH[0]}${data.REH[1]}`}</li>
+                                <li>{`풍향 : ${data.VEC[0]}${data.VEC[1]}`}</li>
+                                <li>{`풍속 : ${data.WSD[0]}${data.WSD[1]}`}</li>
+                                <li>{`동서바람성분 : ${data.UUU[0]}${data.UUU[1]}`}</li>
+                                <li>{`남북바람성분 : ${data.VVV[0]}${data.VVV[1]}`}</li>
                             </ul>
                         </CurrentWeatherStatus>
                         <CurrentWeatherDetailList>
