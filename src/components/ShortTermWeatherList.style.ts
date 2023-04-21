@@ -12,6 +12,22 @@ export const ShortTermWeatherListBox = styled.div`
         margin: 12px 0;
         padding: 12px 48px;
         display: inline-block;
+        img {
+            width: 32px;
+            height: 32px;
+            vertical-align: top;
+            margin-top: -2px;
+        }
+    }
+    #forecast-contents {
+        overflow: hidden;
+        height: 380px;
+        opacity: 1;
+        transition: all 0.4s ease-in-out;
+        &.hidden {
+            height: 0;
+            opacity: 0;
+        }
     }
     .forecast-wrapper {
         position: relative;
