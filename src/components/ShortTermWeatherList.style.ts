@@ -14,7 +14,17 @@ export const ShortTermWeatherListBox = styled.div`
         display: inline-block;
     }
     .forecast-wrapper {
-        overflow: auto;
+        position: relative;
+        overflow: hidden;
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0px;
+            width: 20px;
+            height: 100vh;
+            background: linear-gradient(to left, #fff, transparent);
+        }
     }
     .forecastDateTime {
         display: block;
@@ -41,6 +51,7 @@ export const ShortTermWeatherListBox = styled.div`
         flex-direction: row;
         word-break: keep-all;
         font-size: 0;
+        overflow-x: hidden;
         & > li {
             padding: 8px 0;
         }
@@ -48,12 +59,19 @@ export const ShortTermWeatherListBox = styled.div`
             font-size: 14px;
         }
         .listName {
+            text-align: left;
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            left: 0;
+            background: linear-gradient(to right, white 70%, transparent);
             .icon {
                 visibility: hidden;
             }
         }
         .listValue {
             border-left: solid 1px #E8E8E8;
+            background: linear-gradient(to top, #fafcfd, transparent 50%);
             .temperatures {
                 color: #FFB800;
             }

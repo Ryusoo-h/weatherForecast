@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ShortTermWeatherDataItem } from "../types/weather";
 import { changeDayOrNightIcon, printCategoryStatusByValue, ptyStatus, ptyValue, skyStatus, skyValue, wsdStatus, wsdValue } from "../util/weather";
+import ScrollBar from "./ScrollBar";
 import { ShortTermWeatherListBox } from "./ShortTermWeatherList.style";
 
 type ShortTermWeatherListProps = {
@@ -14,7 +15,19 @@ const ShortTermWeatherList = ({shortTermWeatherData}:ShortTermWeatherListProps) 
     const prevFcstDate = useRef('');
     const prevFcstTime = useRef('');
     const [baseDateTime, setBaseDateTime] = useState("");
-    
+
+    const forecastWrapper: React.MutableRefObject<HTMLDivElement | null> = useRef(null);
+    const forecastList: React.MutableRefObject<HTMLUListElement | null> = useRef(null);
+    const [forecastListWidth, setForecastListWidth] = useState<number>(0);
+    const [forecastListScrollWidth, setForecastListScrollWidth] = useState<number>(0);
+    const callbackForecastList = (element: HTMLUListElement) => {
+        if (element) {
+            forecastList.current = element;
+            setForecastListWidth(element.clientWidth);
+            setForecastListScrollWidth(element.scrollWidth);
+        }
+    }
+
     const updateData = (item:ShortTermWeatherDataItem, newData:Category, value:string) => {
         const {category, fcstDate, fcstTime, baseDate, baseTime} = item;
                         
@@ -69,13 +82,15 @@ const ShortTermWeatherList = ({shortTermWeatherData}:ShortTermWeatherListProps) 
         if (shortTermWeatherData.length > 0) {
             // console.log(shortTermWeatherData);
             setData(getNewData(shortTermWeatherData));
+
         };
     },[shortTermWeatherData]);
     return(
         <ShortTermWeatherListBox>
             <h2>3일 일기예보</h2>
-            <div className="forecast-wrapper">
-                <ul className="TimeForecastList">
+            <ScrollBar wrapperWidth={forecastWrapper.current?.clientWidth} list={forecastList.current} listWidth={forecastListWidth} listScrollWidth={forecastListScrollWidth} />
+            <div className="forecast-wrapper" ref={forecastWrapper}>
+                <ul className="TimeForecastList" ref={callbackForecastList}>
                     <li className="listName">
                         <span className="date">날짜</span>
                         <br /><span className="time">시간</span>
@@ -85,7 +100,7 @@ const ShortTermWeatherList = ({shortTermWeatherData}:ShortTermWeatherListProps) 
                             <li className="temperatures">기온</li>
                             <li className="humidity">습도</li>
                             <li className="precipitation">강수확률</li>
-                            <li className="wind">바람</li>
+                            <li className="wind">바람<br /><br /></li>
                             <li className="wave-height">파고</li>
                         </ul>
                     </li>
