@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { ShortTermWeatherDataItem } from "../types/weather";
 import { changeDayOrNightIcon, printCategoryStatusByValue, ptyStatus, ptyValue, skyStatus, skyValue, wsdStatus, wsdValue } from "../util/weather";
 import ScrollBar from "./ScrollBar";
@@ -113,48 +113,46 @@ const ShortTermWeatherList = ({shortTermWeatherData}:ShortTermWeatherListProps) 
                             // console.log("Object.keys(data): ", Object.keys(data), "data[dateItem] :", data[dateItem]);
                             const timeItem = Object.keys(data[dateItem]).sort((a, b) => Number(a)-Number(b));
                             return (
-                                    <>
+                                    <Fragment key={dateItem}>
                                         {timeItem.map((timeItem) => {
                                             // console.log("data[dateItem][timeItem] :", data[dateItem][timeItem], "timeItem :", timeItem);
                                             const { PTY, SKY, TMP, REH, POP, WSD, VEC, WAV } = data[dateItem][timeItem];
                                             // { 강수형태, 하늘상태, 기온, 습도, 강수확률, 풍속, 풍향, 파고 }
                                             return (
-                                                <>
-                                                    <li className="listValue">
-                                                        <span className="date">{`${dateItem.slice(6,8)}일`}</span>
-                                                        <br /><b className={(Number(timeItem.slice(0,2)) < 6 || Number(timeItem.slice(0,2)) >= 18) ? "time night" : "time"}>{`${timeItem.slice(0,2)}:${timeItem.slice(2,4)}`}</b>
-                                                        <ul>
-                                                            {PTY.includes("없음") ? (
-                                                                <>
-                                                                    <li className="icon">
-                                                                        <img src={`${process.env.PUBLIC_URL}/image/icon-weather/weather${SKY.split(',')[1]}.svg`} alt="logo" />
-                                                                    </li>
-                                                                    <li className="weather">{SKY.split(',')[0]}</li>
-                                                                </>
-                                                            ) : (
-                                                                <>
-                                                                    <li className="icon">
-                                                                        <img src={`${process.env.PUBLIC_URL}/image/icon-weather/weather${PTY.split(',')[1]}.svg`} alt="logo" />
-                                                                    </li>
-                                                                    <li className="weather">{PTY.split(',')[0]}</li>
-                                                                </>
-                                                            )}
-                                                            <li className="temperatures">{TMP}℃</li>
-                                                            <li className="humidity">{REH}%</li>
-                                                            <li className="precipitation">{POP}%</li>
-                                                            <li className="wind">
-                                                                {WSD.split(',')[0]}<br />
-                                                                <span className="wind-direction">
-                                                                    <img style={{transform: `translate(-50%, -40%) rotateZ(${VEC}deg)`}} src={`${process.env.PUBLIC_URL}/image/icon-weather_detail/wind2.svg`} alt="logo" />
-                                                                </span>{WSD.split(',')[1]}m/s
-                                                            </li>
-                                                            <li className="wave-height">{WAV}</li>
-                                                        </ul>
-                                                    </li>
-                                                </>
+                                                <li className="listValue" key={dateItem + timeItem}>
+                                                    <span className="date">{`${dateItem.slice(6,8)}일`}</span>
+                                                    <br /><b className={(Number(timeItem.slice(0,2)) < 6 || Number(timeItem.slice(0,2)) >= 18) ? "time night" : "time"}>{`${timeItem.slice(0,2)}:${timeItem.slice(2,4)}`}</b>
+                                                    <ul>
+                                                        {PTY.includes("없음") ? (
+                                                            <>
+                                                                <li className="icon">
+                                                                    <img src={`${process.env.PUBLIC_URL}/image/icon-weather/weather${SKY.split(',')[1]}.svg`} alt="logo" />
+                                                                </li>
+                                                                <li className="weather">{SKY.split(',')[0]}</li>
+                                                            </>
+                                                        ) : (
+                                                            <>
+                                                                <li className="icon">
+                                                                    <img src={`${process.env.PUBLIC_URL}/image/icon-weather/weather${PTY.split(',')[1]}.svg`} alt="logo" />
+                                                                </li>
+                                                                <li className="weather">{PTY.split(',')[0]}</li>
+                                                            </>
+                                                        )}
+                                                        <li className="temperatures">{TMP}℃</li>
+                                                        <li className="humidity">{REH}%</li>
+                                                        <li className="precipitation">{POP}%</li>
+                                                        <li className="wind">
+                                                            {WSD.split(',')[0]}<br />
+                                                            <span className="wind-direction">
+                                                                <img style={{transform: `translate(-50%, -40%) rotateZ(${VEC}deg)`}} src={`${process.env.PUBLIC_URL}/image/icon-weather_detail/wind2.svg`} alt="logo" />
+                                                            </span>{WSD.split(',')[1]}m/s
+                                                        </li>
+                                                        <li className="wave-height">{WAV}</li>
+                                                    </ul>
+                                                </li>
                                             )
                                         })}
-                                    </>
+                                    </Fragment>
                             );
                         })}
                     </ul>
