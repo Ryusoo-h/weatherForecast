@@ -6,28 +6,30 @@ const useGetGradeStatus = (grades:string[]):string[] => {
     useEffect(() => {
         if (JSON.stringify(prevGrades) !== JSON.stringify(grades)) {
             setGradeStatus([]);
+            const newGradeStatus:string[] = [];
             grades.forEach((grade) => {
                 switch (grade) {
                     case "0":
-                        setGradeStatus((prevGradeStatus) => [...prevGradeStatus, "정보없음"]);
+                        newGradeStatus.push("정보없음");
                         break;
                     case "1":
-                        setGradeStatus((prevGradeStatus) => [...prevGradeStatus, "좋음"]);
+                        newGradeStatus.push("좋음");
                         break;
                     case "2":
-                        setGradeStatus((prevGradeStatus) => [...prevGradeStatus, "보통"]);
+                        newGradeStatus.push("보통");
                         break;
                     case "3":
-                        setGradeStatus((prevGradeStatus) => [...prevGradeStatus, "나쁨"]);
+                        newGradeStatus.push("나쁨");
                         break;
                     case "4":
-                        setGradeStatus((prevGradeStatus) => [...prevGradeStatus, "매우나쁨"]);
+                        newGradeStatus.push("매우나쁨");
                         break;
                     default:
-                        setGradeStatus((prevGradeStatus) => [...prevGradeStatus, "정보없음"]);
+                        newGradeStatus.push("정보없음");
                         console.log("✅잘못된 등급 값입니다");
                 }
             });
+            setGradeStatus(newGradeStatus);
             setPrevGrades(grades);
         }
     }, [grades, prevGrades]);
