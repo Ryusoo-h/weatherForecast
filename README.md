@@ -1,6 +1,12 @@
 # 스터디
 ## API연습 : 기상정보 받아오기
 
+[👉 만드는 과정 보기](https://www.notion.so/ryu-soohyeon/c7135d19cc90487a9ae985cb5ab8e7ec?pvs=4)
+
+
+
+---
+
 참고 자료
 
 [오픈API 상세 : 기상청_단기예보 ((구)_동네예보) 조회서비스](https://www.data.go.kr/data/15084084/openapi.do)
@@ -8,6 +14,8 @@
 [오픈API 상세 : 기상청_중기예보 조회서비스](https://www.data.go.kr/data/15059468/openapi.do)
 
 [대기환경정보 참고](https://cleanair.seoul.go.kr/information/info11#emergency-response)
+
+[대기환경기준 참고](https://www.me.go.kr/mamo/web/index.do?menuId=586)
 
 ---
 
