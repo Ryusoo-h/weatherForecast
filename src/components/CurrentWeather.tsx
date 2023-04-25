@@ -167,44 +167,42 @@ const CurrentWeather = ({ultraShortTermWeatherData}:UltraShortTermWeatherListPro
     }, [weatherDetailData]);
 
     return(
-        <CurrentWeatherSection>
-                <>
-                    <CurrentWeatherWrapper>
-                        <Title>
-                            현재 날씨 정보
-                            {ultraShortTermWeatherData.length === 0 ? (
-                                <>
-                                    <br />
-                                    <span className="alert">날씨정보를 가져올 수 없습니다😥</span>
-                                </>
-                            ):(
-                                <>
-                                    <br />
-                                    <span>{`${firstData.baseDate.slice(0,4)}년 ${firstData.baseDate.slice(4,6)}월 ${firstData.baseDate.slice(6,8)}일 ${firstData.baseTime.slice(0,2)}:${firstData.baseTime.slice(2,4)}`} 발표</span>
-                                </>
-                            )}
-                        </Title>
-                        <CurrentWeatherStatus onClick={() => {setHiddenDetailAll(!hiddenDetailAll); }}>
-                            <img className={`icon ${!hiddenDetailAll && 'blur'}`} src={`${process.env.PUBLIC_URL}/image/icon-weather/weather${weatherStatus}.svg`} alt="logo" />
-                            <span className={`${!hiddenDetailAll && 'blur'}`}>{data.PTY[0]}</span>
-                            <ul className={`detail-all ${hiddenDetailAll && 'hidden'}`} >
-                                <li>{`기온 : ${data.T1H[0]}${data.T1H[1]}`}</li>
-                                <li>{`강수형태 : ${data.PTY[0]}${data.PTY[1]}`}</li>
-                                <li>{`1시간 강수량 : ${data.RN1[0]}${data.RN1[1]}`}</li>
-                                <li>{`습도 : ${data.REH[0]}${data.REH[1]}`}</li>
-                                <li>{`풍향 : ${data.VEC[0]}${data.VEC[1]}`}</li>
-                                <li>{`풍속 : ${data.WSD[0]}${data.WSD[1]}`}</li>
-                                <li>{`동서바람성분 : ${data.UUU[0]}${data.UUU[1]}`}</li>
-                                <li>{`남북바람성분 : ${data.VVV[0]}${data.VVV[1]}`}</li>
-                            </ul>
-                        </CurrentWeatherStatus>
-                        <CurrentWeatherDetailList>
-                            <CurrentWeatherDetail categoryName="temperature" data={weatherDetailData.temperature}/>
-                            <CurrentWeatherDetail categoryName="humidity" data={weatherDetailData.humidity}/>
-                            <CurrentWeatherDetail categoryName="wind" data={weatherDetailData.wind}/>
-                        </CurrentWeatherDetailList>
-                    </CurrentWeatherWrapper>
-                </>
+        <CurrentWeatherSection id="current-weather">
+            <CurrentWeatherWrapper>
+                <Title>
+                    현재 날씨 정보
+                    {ultraShortTermWeatherData.length === 0 ? (
+                        <>
+                            <br />
+                            <span className="alert">날씨정보를 가져올 수 없습니다😥</span>
+                        </>
+                    ):(
+                        <>
+                            <br />
+                            <span>{`${firstData.baseDate.slice(0,4)}년 ${firstData.baseDate.slice(4,6)}월 ${firstData.baseDate.slice(6,8)}일 ${firstData.baseTime.slice(0,2)}:${firstData.baseTime.slice(2,4)}`} 발표</span>
+                        </>
+                    )}
+                </Title>
+                <CurrentWeatherStatus onClick={() => {setHiddenDetailAll(!hiddenDetailAll); }}>
+                    <img className={`icon ${!hiddenDetailAll && 'blur'}`} src={`${process.env.PUBLIC_URL}/image/icon-weather/weather${weatherStatus}.svg`} alt="logo" />
+                    <span className={`${!hiddenDetailAll && 'blur'}`}>{data.PTY[0]}</span>
+                    <ul className={`detail-all ${hiddenDetailAll && 'hidden'}`} >
+                        <li>{`기온 : ${data.T1H[0]}${data.T1H[1]}`}</li>
+                        <li>{`강수형태 : ${data.PTY[0]}${data.PTY[1]}`}</li>
+                        <li>{`1시간 강수량 : ${data.RN1[0]}${data.RN1[1]}`}</li>
+                        <li>{`습도 : ${data.REH[0]}${data.REH[1]}`}</li>
+                        <li>{`풍향 : ${data.VEC[0]}${data.VEC[1]}`}</li>
+                        <li>{`풍속 : ${data.WSD[0]}${data.WSD[1]}`}</li>
+                        <li>{`동서바람성분 : ${data.UUU[0]}${data.UUU[1]}`}</li>
+                        <li>{`남북바람성분 : ${data.VVV[0]}${data.VVV[1]}`}</li>
+                    </ul>
+                </CurrentWeatherStatus>
+                <CurrentWeatherDetailList>
+                    <CurrentWeatherDetail categoryName="temperature" data={weatherDetailData.temperature}/>
+                    <CurrentWeatherDetail categoryName="humidity" data={weatherDetailData.humidity}/>
+                    <CurrentWeatherDetail categoryName="wind" data={weatherDetailData.wind}/>
+                </CurrentWeatherDetailList>
+            </CurrentWeatherWrapper>
         </CurrentWeatherSection>
     );
 };

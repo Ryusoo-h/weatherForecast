@@ -1,7 +1,7 @@
 
 import styled from "styled-components";
 
-export const TotalStatusSection = styled.section`
+export const AirQualityStatusSection = styled.section`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,7 +24,7 @@ export const TotalStatusSection = styled.section`
         font-weight: bold;
     }
 `;
-export const TotalStatusWrapper = styled.section`
+export const AirQualityStatusWrapper = styled.section`
     position: relative;
     width: 205px;
     height: 205px;
@@ -49,7 +49,7 @@ export const TotalStatusWrapper = styled.section`
     }
 `;
 
-export const DetailStatusDotWrapper = styled.section`
+export const AirQualityStatusDotWrapper = styled.section`
     ul {
         list-style: none;
         margin: 0;

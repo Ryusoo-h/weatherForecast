@@ -19,6 +19,17 @@ html, body, header, section, div, p, button, ul, li {
   padding: 0;
 }
 
+.container {
+  margin: 0 auto;
+  width: 800px;
+}
+.info-gray-text {
+  display: block;
+  text-align: right;
+  color: #6D86A3;
+  opacity: 0.5;
+  margin: 0.5rem 0 1rem;
+}
 /* START 아래 컬러별 클래스이름은 TotalStatus의 gradeColorClassName과 일치함 START */
 .status-good-gradation {
   background: linear-gradient(180deg, #5AE1FF 22.92%, #C2FFDE 100%);

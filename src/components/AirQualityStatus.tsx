@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import useGetGradeStatus from "../hooks/useGetGradeStatus";
-import { DetailStatusDotWrapper, TotalStatusSection, TotalStatusWrapper } from "./AirQualityStatus.style";
+import { AirQualityStatusDotWrapper, AirQualityStatusSection, AirQualityStatusWrapper } from "./AirQualityStatus.style";
 
 type TotalGradeType = "1" | "2" | "3" | "4" | "0";
 type detailGradeType = "1" | "2" | "3" | "4" | "0";
@@ -65,17 +65,17 @@ const AirQualityStatus = ({lotate, totalGrade, detailGrade, detailGradeState, da
     },[dateTime]);
 
     return (
-        <TotalStatusSection className={gradeColorClassName.current[totalGrade as TotalGradeType || 0].main}>
+        <AirQualityStatusSection id="air-quailty-status" className={gradeColorClassName.current[totalGrade as TotalGradeType || 0].main}>
             <p className="date-and-location">
                 <span className="location">{lotate ? lotate : "측정소 정보 없음"}</span>
                 <span className="date">{year}년 {month}월 {day}일 {hour}:{minute} 기준</span>
             </p>
-            <TotalStatusWrapper className={gradeColorClassName.current[totalGrade as TotalGradeType || 0].totalStatus}>
+            <AirQualityStatusWrapper className={gradeColorClassName.current[totalGrade as TotalGradeType || 0].totalStatus}>
                 <p className="status">
                     <span className="status-title">통합대기환경수치</span>
                     <span className="status-grade">{totalGradeStatus}</span>
                 </p>
-                <DetailStatusDotWrapper>
+                <AirQualityStatusDotWrapper>
                     <ul>
                         <li className={gradeColorClassName.current[detailGrade.pm25Grade1h as detailGradeType].detailStatus}><span>초미세먼지 : {detailGradeState[0]}</span></li>
                         <li className={gradeColorClassName.current[detailGrade.pm10Grade1h as detailGradeType].detailStatus}><span>미세먼지 : {detailGradeState[1]}</span></li>
@@ -84,9 +84,9 @@ const AirQualityStatus = ({lotate, totalGrade, detailGrade, detailGradeState, da
                         <li className={gradeColorClassName.current[detailGrade.no2Grade as detailGradeType].detailStatus}><span>이산화질소 : {detailGradeState[4]}</span></li>
                         <li className={gradeColorClassName.current[detailGrade.coGrade as detailGradeType].detailStatus}><span>일산화탄소 : {detailGradeState[5]}</span></li>
                     </ul>
-                </DetailStatusDotWrapper>
-            </TotalStatusWrapper>
-        </TotalStatusSection>
+                </AirQualityStatusDotWrapper>
+            </AirQualityStatusWrapper>
+        </AirQualityStatusSection>
     );
 };
 
