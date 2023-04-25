@@ -52,7 +52,6 @@ const AirQualityDetail = ({airQualityKeys, airQualityValue, detailGradeState}:Ai
         let barMaxWidth = 0;
         for(let i:number = 0; i < gradeStandardbarWidths.length; i++) {
             barMaxWidth = barMaxWidth + (gradeStandardbarWidths[i]);
-            console.log(i, barMaxWidth, "vs", graphDotLocation);
             if (barMaxWidth > graphDotLocation) {
                 if (i === 0) {
                     setGraphDotColor("color0");
