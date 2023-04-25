@@ -24,12 +24,13 @@ export type AirQualityData = {
     coValue: string; // 일산화탄소 농도 ppm
     coGrade: string; // 일산화탄소 지수
 
+    pm25Value24: string | null;// 미세먼지(PM2.5) 24시간예측이동농도
+    pm10Value24: string;// 미세먼지(PM10) 24시간예측이동농도
+
     // 이 아래는 사용 안함
     khaiValue: string | null; // 통합대기환경수치
     pm25Grade: string | null; // 미세먼지(PM10) 24시간 등급
-    pm25Value24: string | null;
-    pm25Flag: string | null;
-    pm10Value24: string;
+    pm25Flag: string | null; // 미세먼지(PM2.5) 플래그
     pm10Grade: string;
     pm10Flag: string | null;
     no2Flag: string;
@@ -37,6 +38,18 @@ export type AirQualityData = {
     o3Flag: string | null;
     so2Flag: string | null;
 };
+
+export type AirQualityValue = {
+    pm25Value: string;
+    pm25Value24: string;
+    pm10Value24: string;
+    pm10Value: string;
+    o3Value: string;
+    so2Value: string;
+    no2Value: string;
+    coValue: string;
+    [key: string]: string; // 인덱스 시그니처 추가
+}
 
 export type ultraShortTermWeatherDataItem = {
     baseDate: string;

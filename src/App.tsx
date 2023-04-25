@@ -9,9 +9,10 @@ import CurrentWeather from './components/CurrentWeather';
 import CheckShortTermWeatherList from './components/ShortTermWeatherList';
 import CheckUltraShortTermWeatherList from './components/CheckUltraShortTermWeatherList';
 import useGetGradeStatus from './hooks/useGetGradeStatus';
-import { AirQualityData, ShortTermWeatherDataItem, ultraShortTermWeatherDataItem } from './types/weather';
+import { AirQualityValue, AirQualityData, ShortTermWeatherDataItem, ultraShortTermWeatherDataItem } from './types/weather';
 import AirQualityStatus from './components/AirQualityStatus';
 import ShortTermWeatherList from './components/ShortTermWeatherList';
+import AirQuailtyList from './components/AirQualityList';
 
 const CheckDataSection = styled.section`
   margin: 0 auto;
@@ -56,12 +57,13 @@ function App() {
     "coValue": "0", // 일산화탄소 농도 ppm
     "coGrade": "0", // 일산화탄소 지수
 
+    "pm25Value24": "-",// 미세먼지(PM2.5) 24시간예측이동농도
+    "pm10Value24": "-", // 미세먼지(PM10) 24시간예측이동농도
+
     // 이 아래는 사용 안함
     "khaiValue": "0", // 통합대기환경수치
     "pm25Grade": "0",
-    "pm25Value24": "-",
     "pm25Flag": "0", // 미세먼지(PM2.5) 플래그..
-    "pm10Value24": "0", // 미세먼지(PM10) 24시간예측이동농도
     "pm10Grade": "0", // 미세먼지(PM10) 24시간 등급
     "pm10Flag": "0",
     "no2Flag": "0",
@@ -81,7 +83,24 @@ function App() {
     "no2Grade": "0", // 이산화질소 지수
     "coGrade": "0", // 일산화탄소 지수
   });
-
+  const detailGradeState = useGetGradeStatus([
+    airDetailGrade.pm25Grade1h,
+    airDetailGrade.pm10Grade1h,
+    airDetailGrade.o3Grade,
+    airDetailGrade.so2Grade,
+    airDetailGrade.no2Grade,
+    airDetailGrade.coGrade
+  ]);
+  const [airQualityValue, setAirQualityValue] = useState<AirQualityValue>({
+    "pm25Value": "0", // 미세먼지(PM2.5) 농도 ㎍/㎥
+    "pm25Value24": "-",// 미세먼지(PM2.5) 24시간예측이동농도
+    "pm10Value24": "-", // 미세먼지(PM10) 24시간예측이동농도
+    "pm10Value": "0", // 미세먼지(PM10) 농도 ㎍/㎥
+    "o3Value": "0", // 오존 농도 ppm
+    "so2Value": "0", // 아황산가스 농도 ppm
+    "no2Value": "0", // 이산화질소 농도 ppm
+    "coValue": "0", // 일산화탄소 농도 ppm
+  });
   useEffect(() => {
     airQualityLiveInfo.then((response) => {
       if (!Array.isArray(response)) {
@@ -99,7 +118,8 @@ function App() {
   },[]);
 
   useEffect(() => {
-    const { pm25Grade1h, pm10Grade1h, o3Grade, so2Grade, no2Grade, coGrade } = airQualityData;
+    const { pm25Grade1h, pm10Grade1h, o3Grade, so2Grade, no2Grade, coGrade, pm25Value, pm25Value24, pm10Value24, pm10Value, o3Value, so2Value, no2Value, coValue } = airQualityData;
+    
     setAirDetailGrade({ 
       pm25Grade1h: pm25Grade1h || "0",
       pm10Grade1h: pm10Grade1h || "0",
@@ -108,16 +128,18 @@ function App() {
       no2Grade: no2Grade || "0",
       coGrade: coGrade || "0"
     });
+    setAirQualityValue({
+      pm25Value: pm25Value || "0",
+      pm25Value24: pm25Value24 || "-",
+      pm10Value24: pm10Value24 || "-",
+      pm10Value: pm10Value || "0",
+      o3Value: o3Value || "0",
+      so2Value: so2Value || "0",
+      no2Value: no2Value || "0",
+      coValue: coValue || "0",
+    });
   },[airQualityData])
 
-  const detailGradeState = useGetGradeStatus([
-    airDetailGrade.pm25Grade1h,
-    airDetailGrade.pm10Grade1h,
-    airDetailGrade.o3Grade,
-    airDetailGrade.so2Grade,
-    airDetailGrade.no2Grade,
-    airDetailGrade.coGrade
-  ]);
 
   return (
     <div className="App">
@@ -125,6 +147,7 @@ function App() {
       <CurrentWeather ultraShortTermWeatherData={ultraShortTermWeatherData} />
       <ShortTermWeatherList shortTermWeatherData={shortTermWeatherData} />
       <AirQualityStatus lotate={airQualityData.stationName} totalGrade={airQualityData.khaiGrade} detailGrade={airDetailGrade} detailGradeState={detailGradeState} dateTime={airQualityData.dataTime}/>
+      <AirQuailtyList mangName={airQualityData.mangName} airQualityValue={airQualityValue} detailGradeState={detailGradeState} />
       {/* <CheckDataSection>
         <div className="wrapper">
           <h2>실시간 대기 정보</h2>
