@@ -72,7 +72,7 @@ const AirQualityDetail = ({airQualityKeys, airQualityValue, detailGradeState}:Ai
         <TitleList>
             <span className="title">
                 {title}
-                <br /><span className="unit">{unit}</span>
+                <span className="unit">{unit}</span>
             </span>
             <ul> 
                 <li className="graph">

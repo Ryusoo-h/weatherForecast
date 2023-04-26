@@ -15,7 +15,7 @@ const CurrentWeatherDetail = ({categoryName, data}:CurrentWeatherDetailType) => 
                 <li key={categoryName + "-icon-and-value"} className={`icon-and-value ${categoryName}`}>
                     <img className="icon" 
                         style={{transform: `rotate(${Array.isArray(value) ? value[0] : 0}deg)`}} 
-                        src={`${process.env.PUBLIC_URL}/image/icon-weather_detail/${categoryName}${icon}.svg`} alt="logo" 
+                        src={`${process.env.PUBLIC_URL}/image/icon-weather_detail/${categoryName}${icon}.svg`} alt={`${categoryName}-icon`} 
                     />
                     <span className="value">{Array.isArray(value) ? value[0] : value}{unit}</span>
                 </li>

@@ -65,4 +65,27 @@ export const WeatherDetail = styled.li`
             display: block;
         }
     }
+    @media screen and (max-width: 599px) {
+        .category {
+            font-size: 16px;
+        }
+        .icon-and-value {
+            width: 100%;
+            height: auto;
+            .icon {
+                width: 100%;
+                height: auto;
+            }
+            .value {
+                font-size: 3.6vw;
+            }
+            &.wind::before,
+            &.wind::after {
+                width: 64px;
+            }
+        }
+        .info {
+            font-size: 14px;
+        }
+    }
 `;

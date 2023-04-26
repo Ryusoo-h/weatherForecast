@@ -23,6 +23,17 @@ export const AirQualityStatusSection = styled.section`
         font-size: 24px;
         font-weight: bold;
     }
+    
+    @media screen and (max-width: 469px) {
+        .date {
+            font-size: 5.55vw;
+        }
+    }
+    @media screen and (max-width: 360px) {
+        .date {
+            font-size: 20px;
+        }
+    }
 `;
 export const AirQualityStatusWrapper = styled.section`
     position: relative;

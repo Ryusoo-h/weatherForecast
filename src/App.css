@@ -10,7 +10,6 @@
 html, body {
   font-family: 'Pretendard-Regular';
   font-size: 16px;
-  min-width: 700px;
 }
 
 html, body, header, section, div, p, button, ul, li {
@@ -30,7 +29,12 @@ html, body, header, section, div, p, button, ul, li {
   opacity: 0.5;
   margin: 0.5rem 0 1rem;
 }
-/* START 아래 컬러별 클래스이름은 TotalStatus의 gradeColorClassName과 일치함 START */
+.section-title {
+  text-align: center;
+  font-size: 28px;
+  line-height: 0.9em;
+}
+/* START 컬러별 클래스이름은 TotalStatus의 gradeColorClassName과 일치함 START */
 .status-good-gradation {
   background: linear-gradient(180deg, #5AE1FF 22.92%, #C2FFDE 100%);
 }
@@ -70,6 +74,29 @@ html, body, header, section, div, p, button, ul, li {
   background: #FF7979;
 }
 
-/* END 아래 컬러별 클래스이름은 TotalStatus의 gradeColorClassName과 일치함 END */
+/* END 컬러별 클래스이름은 TotalStatus의 gradeColorClassName과 일치함 END */
 
+@media screen and (max-width: 859px) {
+  .container {
+    width: 100%;
+    padding: 0 24px;
+  }
+}
 
+@media screen and (max-width: 599px) {
+  html, body {
+    font-family: 'Pretendard-Regular';
+    font-size: 13px;
+  }
+  .section-title {
+    font-size: 5.55vw;
+  }
+  .info-gray-text {
+    margin: 0.5rem 0;
+  }
+}
+@media screen and (max-width: 360px) {
+  .section-title {
+    font-size: 20px;
+  }
+}

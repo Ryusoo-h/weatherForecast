@@ -9,6 +9,7 @@ export const TitleList = styled.li`
         font-size: 20px;
         font-weight: bold;
         .unit {
+            display: block;
             font-size: 16px;
             font-weight: normal;
         }
@@ -18,7 +19,7 @@ export const TitleList = styled.li`
         display: flex;
         list-style: none;
         margin: 0;
-        padding: 0 8px 0 0;
+        padding: 8px;
         .graph {
             padding-top: 20px;
             width: 330px;
@@ -112,5 +113,115 @@ export const TitleList = styled.li`
                 }
             }
         } 
+    }
+    @media screen and (max-width: 859px) {
+        .title {
+            flex-shrink: 0;
+            width: 92px;
+            text-align: right;
+            font-size: 20px;
+            font-weight: bold;
+            .unit {
+                font-size: 16px;
+                font-weight: normal;
+            }
+        }
+        & > ul {
+            flex-direction: column;
+            gap: 16px;
+            max-width: 500px;
+            .graph {
+                width: unset;
+                max-width: 500px;
+                .graph-bar-wrapper {
+                    width: 100%;
+                    font-size: 14px;
+                    .unit {
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        transform: translate(0, calc(-120%))
+                    }
+                }
+            }
+        }
+    }
+    @media screen and (max-width: 489px) {
+        gap: 12px;
+        .title {
+            width: auto;
+            text-align: left;
+            font-size: 3.88vw;
+            .unit {
+                display: inline;
+                font-size: 3.33vw;
+                padding-left: 4px;
+            }
+        }
+        & > ul {
+            width: 100%;
+            padding: 0;
+            .graph {
+                .graph-bar-wrapper {
+                    width: 100%;
+                    font-size: 3.33vw;
+                    .unit {
+                        transform: translate(0, calc(-180%))
+                    }
+                }
+            }
+        }
+        ul {
+            .grade-and-value {
+                flex-grow: 1;
+                & ul {
+                    width: 100%;
+                    padding: 0;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    text-align: center;
+                    gap: 4px;
+                    border-radius: 8px;
+                    overflow: hidden;
+                    &.doubleList {
+                        li {
+                            width: 50%;
+                        }
+                    }
+                    li {
+                        box-sizing: border-box;
+                        flex-grow: 1;
+                        background-color: #F8F8F8;
+                        padding: 8px;
+                        font-size: 3.33vw;
+                    }
+                }
+            } 
+        }
+    }
+    @media screen and (max-width: 360px) {
+        .title {
+            font-size: 14px;
+            .unit {
+                font-size: 12px;
+            }
+        }
+        & > ul {
+            .graph {
+                .graph-bar-wrapper {
+                    font-size: 12px;
+                }
+            }
+        }
+        ul {
+            .grade-and-value {
+                & ul {
+                    li {
+                        font-size: 12px;
+                    }
+                }
+            } 
+        }
     }
 `;

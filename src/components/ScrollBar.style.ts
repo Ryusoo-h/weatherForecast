@@ -36,4 +36,21 @@ export const ScrollBarWrapper = styled.div`
             }
         }
     }
+    @media screen and (max-width: 599px) {
+        height: 4px;
+        border-radius: 2px;
+        .scroll-bar {
+            height: 4px;
+            border-radius: 2px;
+            background-color: #B9E3FE;
+            border: none;
+            box-shadow: none;
+            &:hover {
+                box-shadow: none;
+            }
+            img {
+                display: none;
+            }
+        }
+    }
 `;

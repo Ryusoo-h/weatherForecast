@@ -88,9 +88,9 @@ const ShortTermWeatherList = ({shortTermWeatherData}:ShortTermWeatherListProps) 
     return(
         <ShortTermWeatherListSection id="short-term-weather-list">
             <div className="container">
-                <h2 aria-controls="forecast-contents" onClick={() => {setIsHiddenForecast(!isHiddenForecast);}}>
+                <h2 className="section-title" aria-controls="forecast-contents" onClick={() => {setIsHiddenForecast(!isHiddenForecast);}}>
                     3일 일기예보
-                    <img src={`${process.env.PUBLIC_URL}/image/icon/line-arrow2.svg`} style={{transform: `rotateZ(90deg) ${isHiddenForecast ? "" : "scaleX(-1)"}`}} alt="logo" />
+                    <img src={`${process.env.PUBLIC_URL}/image/icon/line-arrow2.svg`} style={{transform: `rotateZ(90deg) ${isHiddenForecast ? "" : "scaleX(-1)"}`}} alt="toggle-button-arrow-icon" />
                     </h2>
                 <div id="forecast-contents" className={isHiddenForecast ? "hidden" : ""}>
                     <ScrollBar wrapperWidth={forecastWrapper.current?.clientWidth} list={forecastList.current} listWidth={forecastListWidth} listScrollWidth={forecastListScrollWidth} />
@@ -127,14 +127,14 @@ const ShortTermWeatherList = ({shortTermWeatherData}:ShortTermWeatherListProps) 
                                                             {PTY.includes("없음") ? (
                                                                 <>
                                                                     <li className="icon">
-                                                                        <img src={`${process.env.PUBLIC_URL}/image/icon-weather/weather${SKY.split(',')[1]}.svg`} alt="logo" />
+                                                                        <img src={`${process.env.PUBLIC_URL}/image/icon-weather/weather${SKY.split(',')[1]}.svg`} alt="weather-icon" loading="lazy"/>
                                                                     </li>
                                                                     <li className="weather">{SKY.split(',')[0]}</li>
                                                                 </>
                                                             ) : (
                                                                 <>
                                                                     <li className="icon">
-                                                                        <img src={`${process.env.PUBLIC_URL}/image/icon-weather/weather${PTY.split(',')[1]}.svg`} alt="logo" />
+                                                                        <img src={`${process.env.PUBLIC_URL}/image/icon-weather/weather${PTY.split(',')[1]}.svg`} alt="weather-icon" loading="lazy"/>
                                                                     </li>
                                                                     <li className="weather">{PTY.split(',')[0]}</li>
                                                                 </>
@@ -144,9 +144,11 @@ const ShortTermWeatherList = ({shortTermWeatherData}:ShortTermWeatherListProps) 
                                                             <li className="precipitation">{POP}%</li>
                                                             <li className="wind">
                                                                 {WSD.split(',')[0]}<br />
-                                                                <span className="wind-direction">
-                                                                    <img style={{transform: `translate(-50%, -40%) rotateZ(${VEC}deg)`}} src={`${process.env.PUBLIC_URL}/image/icon-weather_detail/wind2.svg`} alt="logo" />
-                                                                </span>{WSD.split(',')[1]}m/s
+                                                                <span className="wind-direction-and-wind-speed">
+                                                                    <span className="wind-direction">
+                                                                        <img style={{transform: `translate(-50%, -40%) rotateZ(${VEC}deg)`}} src={`${process.env.PUBLIC_URL}/image/icon-weather_detail/wind2.svg`} alt="wind-arrow-icon" loading="lazy"/>
+                                                                    </span>{WSD.split(',')[1]}m/s
+                                                                </span>
                                                             </li>
                                                             <li className="wave-height">{WAV}</li>
                                                         </ul>

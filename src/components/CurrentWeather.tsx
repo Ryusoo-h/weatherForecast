@@ -169,7 +169,7 @@ const CurrentWeather = ({ultraShortTermWeatherData}:UltraShortTermWeatherListPro
     return(
         <CurrentWeatherSection id="current-weather">
             <CurrentWeatherWrapper>
-                <Title>
+                <Title className="section-title">
                     현재 날씨 정보
                     {ultraShortTermWeatherData.length === 0 ? (
                         <>
@@ -184,7 +184,7 @@ const CurrentWeather = ({ultraShortTermWeatherData}:UltraShortTermWeatherListPro
                     )}
                 </Title>
                 <CurrentWeatherStatus onClick={() => {setHiddenDetailAll(!hiddenDetailAll); }}>
-                    <img className={`icon ${!hiddenDetailAll && 'blur'}`} src={`${process.env.PUBLIC_URL}/image/icon-weather/weather${weatherStatus}.svg`} alt="logo" />
+                    <img className={`icon ${!hiddenDetailAll && 'blur'}`} src={`${process.env.PUBLIC_URL}/image/icon-weather/weather${weatherStatus}.svg`} alt="weather-icon" />
                     <span className={`${!hiddenDetailAll && 'blur'}`}>{data.PTY[0]}</span>
                     <ul className={`detail-all ${hiddenDetailAll && 'hidden'}`} >
                         <li>{`기온 : ${data.T1H[0]}${data.T1H[1]}`}</li>

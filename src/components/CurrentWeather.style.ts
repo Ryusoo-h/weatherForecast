@@ -3,27 +3,37 @@ import styled from "styled-components";
 
 export const CurrentWeatherSection = styled.section`
     background: linear-gradient(180deg, #8FC9FF 9.38%, rgba(203, 255, 252, 0.14) 80.21%);
-    height: 338px;
+    max-height: 338px;
     padding: 36px 0 32px;
+    @media screen and (max-width: 599px) {
+        padding: 24px 0 16px;
+    }
 `;
 
 export const CurrentWeatherWrapper = styled.div`
     width: 100%;
     max-width: 700px;
+    width: 100%;
     margin: 0 auto;
     display: grid;
     justify-content: center;
-    grid: 60px 178px / 196px calc(100% - 256px);
+    grid: 60px 178px / 196px calc(100% - 252px);
     gap: 32px 16px;
+    @media screen and (max-width: 599px) {
+        grid: 60px 41.1vw / 32.22vw calc(100% - (32.22vw + 56px));
+        gap: 16px;
+    }
+    @media screen and (max-width: 360px) {
+        width: 312px;
+        grid: 60px 148px / 116px calc(100% - (116px + 8px));
+        gap: 8px;
+    }
 `;
 
 export const Title = styled.h2`
     margin: 0;
-    text-align: center;
     color: #fff;
     text-shadow: 0px 2px 8px rgba(73, 121, 181, 0.3);
-    font-size: 28px;
-    line-height: 0.9em;
     grid-area: 1/2/2/3;
     position: relative;
     span {
@@ -41,6 +51,18 @@ export const Title = styled.h2`
         font-size: 14px;
         line-height: 20px;
     }
+    @media screen and (max-width: 599px) {
+        grid-area: 1/1/2/3;
+        span {
+            font-size: 3.33vw;
+        }
+    }
+    @media screen and (max-width: 360px) {
+        grid-area: 1/1/2/3;
+        span {
+            font-size: 12px;
+        }
+    }
 `;
 
 export const CurrentWeatherStatus = styled.div`
@@ -57,8 +79,8 @@ export const CurrentWeatherStatus = styled.div`
     align-items: center;
     overflow: hidden;
     .icon {
-        width: 180px;
-        height: 180px;
+        width: 100%;
+        height: auto;
         transition: all 0.25s ease-in-out;
         &.blur {
             filter: blur(6px);
@@ -111,6 +133,58 @@ export const CurrentWeatherStatus = styled.div`
             opacity: 1;
         }
     }
+    @media screen and (max-width: 599px) {
+        padding-top: 8px;
+        width: 32.22vw;
+        height: 41.1vw;
+        grid-area: 2/1/3/3;
+        span {
+            margin-top: 0;
+            font-size: 18px;
+        }
+        .detail-all{
+            padding: 12px 0px 12px 18px;
+            font-size: 2.55vw;
+            li {
+                margin: 0.3em 0px;
+            }
+        }
+    }
+    @media screen and (max-width: 469px) {
+        .icon {
+            &.blur {
+                filter: none;
+                opacity: 1;
+            }
+        }
+        span {
+            font-size: 4.44vw;
+            &.blur {
+                filter: none;
+                opacity: 1;
+            }
+        }
+        .detail-all{
+            display: none;
+        }
+        &:hover {
+            & .icon:not(.blur) {
+                filter: none;
+                opacity: 1;
+                & + span:not(.blur) {
+                    filter: none;
+                    opacity: 1;
+                }
+            }
+        }
+    }
+    @media screen and (max-width: 360px) {
+        width: 116px;
+        height: 148px;
+        span {
+            font-size: 16px;
+        }
+    }
 `;
 
 export const CurrentWeatherDetailList = styled.ul`
@@ -120,5 +194,6 @@ export const CurrentWeatherDetailList = styled.ul`
     grid-area: 2/2/3/3;
     display: flex;
     justify-content: space-around;
+    align-items: center;
     list-style: none;
 `;
