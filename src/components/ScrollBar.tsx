@@ -32,13 +32,13 @@ const ScrollBar = ({ wrapperWidth, list, listWidth, listScrollWidth }:ScrollBarP
         }
     },[listWidth, listScrollWidth, scrollbar, scrollbarWidth, wrapperWidth, scrollbarMaxX]);
 
-    const updateScrollX = useCallback((e: globalThis.MouseEvent) => {
+    const updateScrollX = useCallback((e: globalThis.MouseEvent | globalThis.TouchEvent) => {
         if (!isthrottle.current) {
             isthrottle.current = true;
             setTimeout(async() => {
-                let newScrollbarMoveX = prevScrollbarX.current + (e.pageX - mouseDownX.current);
+                let newScrollbarMoveX = prevScrollbarX.current + (('clientX' in e ? e.clientX : e.touches[0].clientX) - mouseDownX.current);
                 // console.log("이전 위치 : ", prevScrollbarX.current, 
-                //     "\n새 위치(지금X - 시작X) : ", newScrollbarMoveX, " = ", e.pageX, " - ", mouseDownX.current);
+                //     "\n새 위치(지금X - 시작X) : ", newScrollbarMoveX, " = ", e.clientX, " - ", mouseDownX.current);
                 if (newScrollbarMoveX < 0) { // 스크롤바가 스크롤트랙 영역을 넘어가지 않도록함
                     newScrollbarMoveX = 0;
                 } else if (newScrollbarMoveX > scrollbarMaxX.current ) {
@@ -60,14 +60,19 @@ const ScrollBar = ({ wrapperWidth, list, listWidth, listScrollWidth }:ScrollBarP
 
     const onMouseUp = useCallback(() => {
         window.removeEventListener('mouseup', onMouseUp);
+        window.removeEventListener('touchstart', onMouseUp);
         window.removeEventListener('mousemove', updateScrollX);
+        window.removeEventListener('touchmove', updateScrollX);
         prevScrollbarX.current = scrollbarMoveX.current;
     },[updateScrollX]);
-    const onMouseDown = useCallback((e: MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => {
+    const onMouseDown = useCallback((e: MouseEvent<HTMLDivElement, globalThis.MouseEvent> | React.TouchEvent<HTMLDivElement>) => {
         if (e.target === scrollbar.current) {
+            console.log('down?');
             window.addEventListener('mouseup', onMouseUp);
+            window.addEventListener('touchend', onMouseUp);
             window.addEventListener('mousemove', updateScrollX);
-            mouseDownX.current = e.pageX;
+            window.addEventListener('touchmove', updateScrollX);
+            mouseDownX.current = 'clientX' in e ? e.clientX : e.touches[0].clientX;
         }
     }, [onMouseUp, updateScrollX]);
 
@@ -76,6 +81,7 @@ const ScrollBar = ({ wrapperWidth, list, listWidth, listScrollWidth }:ScrollBarP
     return (
         <ScrollBarWrapper id="forecast-scroll" className="scroll-track" ref={scrolltrack}
             onMouseDown={(e) => {onMouseDown(e);}}
+            onTouchStart={(e) => {onMouseDown(e);}}
         >
             <div className={ishiddenScrollbar ? "scroll-bar hidden" : "scroll-bar"} ref={scrollbar} >
                 <img className="reverse" src={`${process.env.PUBLIC_URL}/image/icon/line-arrow.svg`} alt="left-arrow-icon" />

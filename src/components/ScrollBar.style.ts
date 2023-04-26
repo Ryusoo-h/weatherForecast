@@ -28,6 +28,7 @@ export const ScrollBarWrapper = styled.div`
             width: 0;
         }
         img {
+            pointer-events: none;
             width: 24px;
             height: 24px;
             &.reverse {
