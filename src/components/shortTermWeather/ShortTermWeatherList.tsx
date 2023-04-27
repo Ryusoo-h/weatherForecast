@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useRef, useState } from "react";
-import { ShortTermWeatherDataItem } from "../types/weather";
-import { changeDayOrNightIcon, printCategoryStatusByValue, ptyStatus, ptyValue, skyStatus, skyValue, wsdStatus, wsdValue } from "../util/weather";
-import ScrollBar from "./ScrollBar";
+import { ShortTermWeatherDataItem } from "../../types/weather";
+import { changeDayOrNightIcon, printCategoryStatusByValue, ptyStatus, ptyValue, skyStatus, skyValue, wsdStatus, wsdValue } from "../../util/weather";
+import ScrollBar from "../ScrollBar";
 import { ShortTermWeatherListSection } from "./ShortTermWeatherList.style";
 
 type ShortTermWeatherListProps = {

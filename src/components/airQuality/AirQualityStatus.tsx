@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import useGetGradeStatus from "../hooks/useGetGradeStatus";
+import useGetGradeStatus from "../../hooks/useGetGradeStatus";
 import { AirQualityStatusDotWrapper, AirQualityStatusSection, AirQualityStatusWrapper } from "./AirQualityStatus.style";
 
 type TotalGradeType = "1" | "2" | "3" | "4" | "0";

@@ -1,4 +1,4 @@
-import { WeatherDetailData } from "../types/weather";
+import { WeatherDetailData } from "../../types/weather";
 import { WeatherDetail } from "./CurrentWeatherDetail.style";
 
 type CurrentWeatherDetailType = {

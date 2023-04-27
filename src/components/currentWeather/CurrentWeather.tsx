@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { ultraShortTermWeatherDataItem } from "../types/weather";
-import { changeDayOrNightIcon, humidityStatus, humidityValue, printCategoryStatusByValue, ptyStatus, ptyValue, temperatureStatus, temperatureValue, wsdStatus, wsdValue } from "../util/weather";
+import { ultraShortTermWeatherDataItem } from "../../types/weather";
+import { changeDayOrNightIcon, humidityStatus, humidityValue, printCategoryStatusByValue, ptyStatus, ptyValue, temperatureStatus, temperatureValue, wsdStatus, wsdValue } from "../../util/weather";
 import { CurrentWeatherSection, CurrentWeatherWrapper, Title, CurrentWeatherDetailList, CurrentWeatherStatus } from "./CurrentWeather.style";
 import CurrentWeatherDetail from "./CurrentWeatherDetail";
 

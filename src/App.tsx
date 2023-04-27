@@ -5,14 +5,14 @@ import getAirQualityLiveInfo from './api/weatherAPI/getAirQualityLiveInfo';
 import getShortTermWeatherForecast from './api/weatherAPI/getShortTermWeatherForecast';
 import getUltraShortTermWeatherLive from './api/weatherAPI/getUltraShortTermWeatherLive';
 import './App.css';
-import CurrentWeather from './components/CurrentWeather';
-import CheckShortTermWeatherList from './components/ShortTermWeatherList';
+import CurrentWeather from './components/currentWeather/CurrentWeather';
+import CheckShortTermWeatherList from './components/CheckShortTermWeatherList';
 import CheckUltraShortTermWeatherList from './components/CheckUltraShortTermWeatherList';
 import useGetGradeStatus from './hooks/useGetGradeStatus';
 import { AirQualityValue, AirQualityData, ShortTermWeatherDataItem, ultraShortTermWeatherDataItem } from './types/weather';
-import AirQualityStatus from './components/AirQualityStatus';
-import ShortTermWeatherList from './components/ShortTermWeatherList';
-import AirQuailtyList from './components/AirQualityList';
+import AirQualityStatus from './components/airQuality/AirQualityStatus';
+import ShortTermWeatherList from './components/shortTermWeather/ShortTermWeatherList';
+import AirQuailtyList from './components/airQuality/AirQualityList';
 
 const CheckDataSection = styled.section`
   margin: 0 auto;

@@ -39,7 +39,9 @@ const ScrollBar = ({ wrapperWidth, list, listWidth, listScrollWidth }:ScrollBarP
                 let newScrollbarMoveX = prevScrollbarX.current + (('clientX' in e ? e.clientX : e.touches[0].clientX) - mouseDownX.current);
                 // console.log("이전 위치 : ", prevScrollbarX.current, 
                 //     "\n새 위치(지금X - 시작X) : ", newScrollbarMoveX, " = ", e.clientX, " - ", mouseDownX.current);
-                if (newScrollbarMoveX < 0) { // 스크롤바가 스크롤트랙 영역을 넘어가지 않도록함
+                
+                // 스크롤바가 스크롤트랙 영역을 넘어가지 않도록함 : 0이상 scrollbarMaxX 이하
+                if (newScrollbarMoveX < 0) { 
                     newScrollbarMoveX = 0;
                 } else if (newScrollbarMoveX > scrollbarMaxX.current ) {
                     newScrollbarMoveX = scrollbarMaxX.current ;

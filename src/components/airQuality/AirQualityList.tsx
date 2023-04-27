@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { AirQualityValue } from "../types/weather";
+import { AirQualityValue } from "../../types/weather";
 import AirQualityDetail from "./AirQualityDetail";
 import { AirQualityListSection } from "./AirQualityList.style";
 

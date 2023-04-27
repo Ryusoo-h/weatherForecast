@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import { AirQualityValue } from "../types/weather";
+import { useEffect, useState } from "react";
+import { AirQualityValue } from "../../types/weather";
 import { TitleList } from "./AirQualityDetail.style";
 
 type AirQuailtyDetailProps = {
