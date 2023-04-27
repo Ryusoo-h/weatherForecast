@@ -35,7 +35,7 @@ type WeatherDetailDataList = {
 type Category = { [CategoryName: string]: [string, string]; };
 
 const CurrentWeather = ({ultraShortTermWeatherData}:UltraShortTermWeatherListProps) => {
-    const [firstData, setFirstData] = useState<ultraShortTermWeatherDataItem>({
+    const [latestData, setFirstData] = useState<ultraShortTermWeatherDataItem>({
         baseDate: "00000000",
         baseTime: "0000",
         category: "",
@@ -179,7 +179,7 @@ const CurrentWeather = ({ultraShortTermWeatherData}:UltraShortTermWeatherListPro
                     ):(
                         <>
                             <br />
-                            <span>{`${firstData.baseDate.slice(0,4)}년 ${firstData.baseDate.slice(4,6)}월 ${firstData.baseDate.slice(6,8)}일 ${firstData.baseTime.slice(0,2)}:${firstData.baseTime.slice(2,4)}`} 발표</span>
+                            <span>{`${latestData.baseDate.slice(0,4)}년 ${latestData.baseDate.slice(4,6)}월 ${latestData.baseDate.slice(6,8)}일 ${latestData.baseTime.slice(0,2)}:${latestData.baseTime.slice(2,4)}`} 발표</span>
                         </>
                     )}
                 </Title>
