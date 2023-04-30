@@ -58,6 +58,7 @@ export const WeatherDetail = styled.li`
     }
     .info {
         color: #6D86A3;
+        height: 2.5rem;
         &.humidity, &.wind{
             line-height: 2.5rem;
         }

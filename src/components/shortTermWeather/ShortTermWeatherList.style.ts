@@ -159,23 +159,14 @@ export const ShortTermWeatherListSection = styled.section`
             h2 {
                 margin: 20px 0 4px;
                 padding: 4px 48px;
-                display: inline-block;
                 img {
                     width: 28px;
                     height: auto;
-                    vertical-align: top;
-                    margin-top: -2px;
                 }
             }
             .forecast-wrapper {
                 &::after {
-                    content: '';
-                    position: absolute;
-                    top: 0;
-                    right: 0px;
                     width: 8px;
-                    height: 100vh;
-                    background: linear-gradient(to left, #fff, transparent);
                 }
             }
             .TimeForecastList {
@@ -212,11 +203,9 @@ export const ShortTermWeatherListSection = styled.section`
                 .icon, .icon img {
                     width: 13.88vw;
                     height: 13.88vw;
-                    font-size: 0;
                 }
                 .weather {
                     font-size: 13px;
-                    font-weight: bold;
                 }
             }
         }

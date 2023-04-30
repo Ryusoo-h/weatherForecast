@@ -18,6 +18,10 @@ html, body, header, section, div, p, button, ul, li {
   padding: 0;
 }
 
+.App > section {
+  min-width: 320px;
+}
+
 .container {
   margin: 0 auto;
   width: 800px;
