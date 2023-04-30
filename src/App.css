@@ -77,6 +77,9 @@ html, body, header, section, div, p, button, ul, li {
 .status-very-bad {
   background: #FF7979;
 }
+.status-no-info {
+  background: #d5d5d5;
+}
 
 /* END 컬러별 클래스이름은 TotalStatus의 gradeColorClassName과 일치함 END */
 
