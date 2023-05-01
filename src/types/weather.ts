@@ -22,3 +22,5 @@ export type ShortTermWeatherDataItem = {
     fcstValue: string;
     category: string;
 }
+
+export type ShortTermWeatherCategory = {[forecastDate: string]:{[forecastTime: string]:{[category: string]: string}}};

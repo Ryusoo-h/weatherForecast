@@ -55,7 +55,7 @@ export const ShortTermWeatherListSection = styled.section`
             grid-row: 1 / 2;
             grid-column: 1 / 3;
         }
-        .TimeForecastList {
+        .timeForecastList {
             display: flex;
             flex-direction: row;
             word-break: keep-all;
@@ -169,7 +169,7 @@ export const ShortTermWeatherListSection = styled.section`
                     width: 8px;
                 }
             }
-            .TimeForecastList {
+            .timeForecastList {
                 ul > li {
                     font-size: 12px;
                 }
